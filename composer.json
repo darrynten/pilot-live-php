@@ -1,6 +1,6 @@
 {
   "name": "darrynten/pilot-live-php",
-  "description": "PHP Client for the Pilot Live API",
+  "description": "PHP Client for the PilotLive API",
   "type": "library",
   "require": {
     "php": "^7.0",

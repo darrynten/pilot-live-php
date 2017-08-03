@@ -5,6 +5,8 @@
 This will be a 100% fully unit tested and (mostly) fully featured unofficial PHP
 client for PilotLive
 
+You will eventually be able to install with:
+
 ```bash
 composer require darrynten/pilot-live-php
 ```
