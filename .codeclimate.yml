@@ -1,0 +1,23 @@
+engines:
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - php
+  fixme:
+    enabled: true
+    checks:
+      TODO:
+        enabled: false
+  phpmd:
+    enabled: true
+    checks:
+      Naming/ShortVariable:
+        enabled: true
+      Design/TooManyFields:
+        enabled: true
+ratings:
+  paths:
+  - "**.php"
+exclude_paths:
+- tests/
