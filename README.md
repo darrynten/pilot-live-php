@@ -61,13 +61,6 @@ Checked off bits are complete.
   - [ ] Open Table List
   - [ ] Open Table Detail
   - [ ] New Open Table
-- [ ] Supplier Invoice
-  - [ ] Supplier Invoice 'Header' Collection
-  - [ ] Supplier Invoice 'Header' Model
-  - [ ] Supplier Invoice Details Collection
-  - [ ] Supplier Invoice Detail Model
-  - [ ] Processed
-  - [ ] Unprocessed
 - [ ] Vendor Payments
   - [ ] Vendor Payment Collection
   - [ ] Vendor Payment Model
@@ -76,7 +69,26 @@ Checked off bits are complete.
   - [ ] App Payment
   - [ ] Zapper Payment
 
+And any related models
+
+Key methods
+
+* VendorPayments/Add
+* OpenTables/Detail
+
 # ==== END OF INITIAL DELIVERY ====
+
+Following this
+
+- [ ] Supplier Invoice
+  - [ ] Supplier Invoice 'Header' Collection
+  - [ ] Supplier Invoice 'Header' Model
+  - [ ] Supplier Invoice Details Collection
+  - [ ] Supplier Invoice Detail Model
+  - [ ] Processed
+  - [ ] Unprocessed
+
+And any methods besides the two in the initial delivers.
 
 ## Deliverables
 
