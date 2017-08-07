@@ -47,7 +47,7 @@ class SupplierInvoice extends BaseModel
             'readonly' => false,
         ],
         'supplierInvoiceDetails' => [
-            'type' => 'SupplierInvoiceDetailCollection',
+            'type' => 'SupplierInvoiceDetail',
             'collection' => true,
             'nullable' => false,
             'readonly' => false,
