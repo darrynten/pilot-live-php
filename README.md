@@ -63,7 +63,7 @@ Checked off bits are complete.
   - [ ] New Open Table
 - [ ] Vendor Payments
   - [ ] Vendor Payment Collection
-  - [ ] Vendor Payment Model
+  - [x] Vendor Payment Model
   - [ ] List Payments
   - [ ] Processed Payments
   - [ ] App Payment
