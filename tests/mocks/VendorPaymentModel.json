@@ -1,0 +1,13 @@
+[{
+  "DiscountAmount":12678967.543233,
+  "PaymentAmount":12678967.543233,
+  "PaymentDate":"String content",
+  "PaymentReference":"String content",
+  "PilotReference":"String content",
+  "Processed":true,
+  "SiteID":"String content",
+  "TipAmount":12678967.543233,
+  "VendorID":2147483647,
+  "VendorPaymentID":2147483647,
+  "VoucherAmount":12678967.543233
+}]
