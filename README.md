@@ -55,11 +55,11 @@ Checked off bits are complete.
 - [ ] Real CRUD Response Mocks
 - [ ] Open Tables
   - [ ] Open Table Collection
-  - [ ] Open Table Model
+  - [x] Open Table Model
   - [ ] Items Collection
-  - [ ] Open Table Detail (Item) Model
+  - [x] Open Table Detail (Item) Model
   - [ ] Open Table List
-  - [ ] Open Table Detail
+  - [x] Open Table Detail
   - [ ] New Open Table
 - [ ] Vendor Payments
   - [ ] Vendor Payment Collection
