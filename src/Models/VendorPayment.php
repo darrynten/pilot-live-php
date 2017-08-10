@@ -99,5 +99,10 @@ class VendorPayment extends BaseModel
         return $collection;
     }
 
+    public function zapper(){
+        $arr = $this->toArray();
+        $data = $this->request->request('POST', $this->endpoint, 'Zapper', $arr);
+        return $data;
+    }
 
 }
