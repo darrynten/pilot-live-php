@@ -41,11 +41,9 @@ class OpenTable extends BaseModel
             'readonly' => false,
         ],
         'items' => [
-            'type' => 'string',
-            // TODO
-            // 'type' => 'ItItemCollectionemCollection',
-            // 'collection' => true,
-            'nullable' => false,
+            'type' => 'Item',
+            'collection' => true,
+            'nullable' => true,
             'readonly' => false,
         ],
         'openTableID' => [
