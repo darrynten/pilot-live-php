@@ -99,6 +99,11 @@ class VendorPayment extends BaseModel
         return $collection;
     }
 
+    /** Add a zapper payment
+     * @link https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help/operations/PostZapperPayment
+     * @param string $req
+     * @return \DarrynTen\PilotLive\Request\stdClass
+     */
     public function zapper(string $req)
     {
         // this string should have some sort of validation
