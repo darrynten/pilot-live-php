@@ -11,6 +11,7 @@ use DarrynTen\PilotLive\BaseModel;
 
 class VendorPayment extends BaseModel
 {
+    private $endpoint = 'VendorPayments';
     /**
      * @var array $fields
      */
@@ -71,4 +72,32 @@ class VendorPayment extends BaseModel
             'readonly' => false,
         ],
     ];
+
+    /**
+     * Adding a payment
+     * @link https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help/operations/PostVendorPayment
+     * @return \DarrynTen\PilotLive\Request\stdClass
+     */
+    public function add()
+    {
+        $arr = $this->toArray();
+        $data = $this->request->request('POST', $this->endpoint, 'Add', $arr);
+        return $data;
+    }
+
+    /**
+     * Getting vendor payments
+     * @link https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help/operations/GetVendorPayments
+     * @return ModelCollection
+     */
+    public function list(){
+
+        $results = $this->request->request('GET', $this->endpoint, 'List', []);
+
+        $collection = new ModelCollection(static::class, $this->config, $results);
+
+        return $collection;
+    }
+
+
 }

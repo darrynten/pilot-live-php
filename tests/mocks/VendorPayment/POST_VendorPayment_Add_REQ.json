@@ -1,0 +1,13 @@
+[{
+  "DiscountAmount":213.01,
+  "PaymentAmount":1000.20,
+  "PaymentDate":"10/10/2017",
+  "PaymentReference":"ABC123",
+  "PilotReference":"123ABC",
+  "Processed":false,
+  "SiteID":"13213145",
+  "TipAmount":10.05,
+  "VendorID":1231,
+  "VendorPaymentID":345565,
+  "VoucherAmount":50.01
+}]
