@@ -687,14 +687,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             'Client'
         );
 
-        $token = base64_encode($this->config['username'] . ':' . $this->config['password']);
-        $tokenType = 'Basic';
-        $checkParameters = [
-            'headers' => [
-                'Authorization' => sprintf('%s %s', $tokenType, $token)
-            ],
-        ];
-
         $checkParameters['query']['apikey'] = $apikey;
 
         if (!empty($parameters)) {
