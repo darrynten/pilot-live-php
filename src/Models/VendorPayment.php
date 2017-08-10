@@ -90,8 +90,8 @@ class VendorPayment extends BaseModel
      * @link https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help/operations/GetVendorPayments
      * @return ModelCollection
      */
-    public function list(){
-
+    public function list()
+    {
         $results = $this->request->request('GET', $this->endpoint, 'List', []);
 
         $collection = new ModelCollection(static::class, $this->config, $results);
@@ -99,10 +99,10 @@ class VendorPayment extends BaseModel
         return $collection;
     }
 
-    public function zapper(){
+    public function zapper()
+    {
         $arr = $this->toArray();
         $data = $this->request->request('POST', $this->endpoint, 'Zapper', $arr);
         return $data;
     }
-
 }
