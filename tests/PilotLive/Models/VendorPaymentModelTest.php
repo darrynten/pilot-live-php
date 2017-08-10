@@ -72,4 +72,10 @@ class VendorPaymentModelTest extends BaseModelTest
             ],
         ]);
     }
+
+    public function testList(){
+        $vendPayment = $this->setUpRequestMock('GET', VendorPayment::class, 'VendorPayments/List', 'VendorPayment/GET_VendorPayment_List.json');
+        $allPayments = $vendPayment->list();
+        $payment = $allPayments->results[0];
+    }
 }
