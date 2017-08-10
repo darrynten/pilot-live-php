@@ -99,9 +99,12 @@ class VendorPayment extends BaseModel
         return $collection;
     }
 
-    public function zapper()
+    public function zapper(string $req)
     {
-        $arr = $this->toArray();
+        // this string should have some sort of validation
+        $arr = [
+            'string' => $req,
+        ];
         $data = $this->request->request('POST', $this->endpoint, 'Zapper', $arr);
         return $data;
     }
