@@ -26,11 +26,9 @@ class OpenTableModelTest extends BaseModelTest
                 'readonly' => false,
             ],
             'items' => [
-                'type' => 'string',
-                // TODO
-                // 'type' => 'ItemCollection',
-                // 'collection' => true,
-                'nullable' => false,
+                'type' => 'Item',
+                'collection' => true,
+                'nullable' => true,
                 'readonly' => false,
             ],
             'openTableID' => [
