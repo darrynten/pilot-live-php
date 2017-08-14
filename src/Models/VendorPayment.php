@@ -11,7 +11,7 @@ use DarrynTen\PilotLive\BaseModel;
 
 class VendorPayment extends BaseModel
 {
-    private $endpoint = 'VendorPayments';
+    protected $endpoint = 'VendorPayments';
     /**
      * @var array $fields
      */
@@ -92,17 +92,17 @@ class VendorPayment extends BaseModel
      */
     public function list()
     {
-        $results = $this->request->request('GET', $this->endpoint, 'List', []);
+        $results = $this->request->request('GET', $this->endpoint, 'List', $this->toArray());
 
-        $collection = new ModelCollection(static::class, $this->config, $results);
+        $collection = new ModelCollection(static::class, $this->config, []);
 
         return $collection;
     }
 
-    /** Add a zapper payment
+    /**
+     * Add a zapper payment
      * @link https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help/operations/PostZapperPayment
      * @param string $req
-     * @return \DarrynTen\PilotLive\Request\stdClass
      */
     public function zapper(string $req)
     {

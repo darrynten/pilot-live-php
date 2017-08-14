@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: fergus
- * Date: 2017/08/07
- * Time: 3:06 PM
- */
 
 namespace DarrynTen\PilotLive\Tests\PilotLive\Models;
 
