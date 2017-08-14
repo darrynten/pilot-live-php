@@ -9,7 +9,7 @@ namespace DarrynTen\PilotLive\Models;
 
 use DarrynTen\PilotLive\BaseModel;
 
-class VendorPayment extends BaseModel
+class VendorPayments extends BaseModel
 {
     protected $endpoint = 'VendorPayments';
     /**
@@ -92,9 +92,9 @@ class VendorPayment extends BaseModel
      */
     public function list()
     {
-        $results = $this->request->request('GET', $this->endpoint, 'List', $this->toArray());
+        $results = $this->request->request('GET', $this->endpoint, 'List');
 
-        $collection = new ModelCollection(static::class, $this->config, []);
+        $collection = new ModelCollection(static::class, $this->config, $results);
 
         return $collection;
     }

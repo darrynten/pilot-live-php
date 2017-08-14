@@ -2,13 +2,13 @@
 
 namespace DarrynTen\PilotLive\Tests\PilotLive\Models;
 
-use DarrynTen\PilotLive\Models\VendorPayment;
+use DarrynTen\PilotLive\Models\VendorPayments;
 
-class VendorPaymentModelTest extends BaseModelTest
+class VendorPaymentsModelTest extends BaseModelTest
 {
     public function testAttributes()
     {
-        $this->verifyAttributes(VendorPayment::class, [
+        $this->verifyAttributes(VendorPayments::class, [
             'discountAmount' => [
                 'type' => 'double',
                 'nullable' => false,
@@ -68,7 +68,7 @@ class VendorPaymentModelTest extends BaseModelTest
     }
 
     public function testList(){
-        $vendPayment = $this->setUpRequestMock('GET', VendorPayment::class, 'VendorPayments/List', 'VendorPayment/GET_VendorPayment_List.json');
+        $vendPayment = $this->setUpRequestMock('GET', VendorPayments::class, 'VendorPayments/List', 'VendorPayment/GET_VendorPayments_List.json');
         $allPayments = $vendPayment->list();
         $payment = $allPayments->results[0];
     }
