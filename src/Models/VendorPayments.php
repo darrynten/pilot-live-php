@@ -74,7 +74,7 @@ class VendorPayments extends BaseModel
     ];
 
     /**
-     * Adding a payment
+     * Adding this payment
      * @link https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help/operations/PostVendorPayment
      * @return \DarrynTen\PilotLive\Request\stdClass
      */

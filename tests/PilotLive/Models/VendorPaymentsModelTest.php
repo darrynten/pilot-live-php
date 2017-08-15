@@ -71,7 +71,7 @@ class VendorPaymentsModelTest extends BaseModelTest
     {
         $vendPayment = $this->setUpRequestMock(
             'GET', // Method
-            VendorPayments::class, // Clss
+            VendorPayments::class, // Class
             'VendorPayments/List', // Path
             'VendorPayments/GET_VendorPayments_List.json' // Mock Response
         );
@@ -90,5 +90,21 @@ class VendorPaymentsModelTest extends BaseModelTest
         $this->assertEquals($payment->vendorID, 1231);
         $this->assertEquals($payment->vendorPaymentID, 345565);
         $this->assertEquals($payment->voucherAmount, 50.01);
+    }
+
+    public function testAdd()
+    {
+        $vendPayment = $this->setUpRequestMock(
+            'POST', // Method
+            VendorPayments::class, // Class
+            'VendorPayments/Add', // Path
+            'VendorPayments/POST_VendorPayments_Add_RESP.json' // Mock Response
+        );
+
+        $response = $vendPayment->add();
+
+        $this->assertEquals($response->code,2147483647);
+        $this->assertEquals($response->message,"String content");
+        $this->assertTrue($response->status);
     }
 }
