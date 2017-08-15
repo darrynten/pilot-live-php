@@ -94,14 +94,13 @@ class VendorPaymentsModelTest extends BaseModelTest
 
     public function testAdd()
     {
-        $vendPayment = $this->setUpRequestMock(
-            'POST', // Method
-            VendorPayments::class, // Class
-            'VendorPayments/Add', // Path
-            'VendorPayments/POST_VendorPayments_Add_RESP.json' // Mock Response
+        $model = new VendorPayments($this->config);
+        $data = json_decode(
+            file_get_contents(__DIR__ . '/../../mocks/VendorPayments/POST_VendorPayments_Add_REQ.json')
         );
+        $model->loadResult($data);
 
-        $response = $vendPayment->add();
+        $response = $model->add();
 
         $this->assertEquals($response->code,2147483647);
         $this->assertEquals($response->message,"String content");
