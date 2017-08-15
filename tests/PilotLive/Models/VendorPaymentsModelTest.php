@@ -70,6 +70,18 @@ class VendorPaymentsModelTest extends BaseModelTest
     public function testList(){
         $vendPayment = $this->setUpRequestMock('GET', VendorPayments::class, 'VendorPayments/List', 'VendorPayments/GET_VendorPayments_List.json');
         $allPayments = $vendPayment->list();
-        $payment = $allPayments->results[0];
+        $payment = $allPayments->results[1];
+
+        $this->assertEquals($payment->discountAmount, 213.01);
+        $this->assertEquals($payment->paymentAmount, 1000.20);
+        $this->assertEquals($payment->paymentDate, "10/10/2017");
+        $this->assertEquals($payment->paymentReference, "ABC123");
+        $this->assertEquals($payment->pilotReference, "123ABC");
+        $this->assertEquals($payment->processed, false);
+        $this->assertEquals($payment->siteID, "13213145");
+        $this->assertEquals($payment->tipAmount, 10.05);
+        $this->assertEquals($payment->vendorID, 1231);
+        $this->assertEquals($payment->vendorPaymentID, 345565);
+        $this->assertEquals($payment->voucherAmount, 50.01);
     }
 }
