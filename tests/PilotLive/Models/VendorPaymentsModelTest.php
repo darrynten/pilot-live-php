@@ -94,16 +94,36 @@ class VendorPaymentsModelTest extends BaseModelTest
 
     public function testAdd()
     {
-        $model = new VendorPayments($this->config);
-        $data = json_decode(
+
+        /**
+         * Do all the usual setup of mock handler, endpoint,
+         * request, response, expects, whens etc
+         */
+        $vendPayment = $this->setUpRequestMock(
+            'POST', // Method
+            VendorPayments::class, // Class
+            'VendorPayments/Add', // Path
+            'VendorPayments/POST_VendorPayments_Add_RESP.json', // Mock Response
+            'VendorPayments/POST_VendorPayments_Add_REQ.json' // Mock Request
+        );
+
+        /**
+         * Load up some "seed" data to set the state of the object
+         * before it actually performs the 'add' function
+         */
+        $seedData = json_decode(
             file_get_contents(__DIR__ . '/../../mocks/VendorPayments/POST_VendorPayments_Add_REQ.json')
         );
-        $model->loadResult($data);
 
-        $response = $model->add();
+        $vendPayment->loadResult($seedData);
 
-        $this->assertEquals($response->code,2147483647);
-        $this->assertEquals($response->message,"String content");
+        // Do the thing
+        $response = $vendPayment->add();
+
+        // Now you just have to deal with the keys having the
+        // weong case in the response ;)
+        $this->assertEquals($response->code, 2147483647);
+        $this->assertEquals($response->message, 'String content');
         $this->assertTrue($response->status);
     }
 }
