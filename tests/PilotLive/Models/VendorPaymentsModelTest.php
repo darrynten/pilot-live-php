@@ -3,6 +3,7 @@
 namespace DarrynTen\PilotLive\Tests\PilotLive\Models;
 
 use DarrynTen\PilotLive\Models\VendorPayments;
+use DarrynTen\PilotLive\Models\Zapper;
 
 class VendorPaymentsModelTest extends BaseModelTest
 {
@@ -129,7 +130,7 @@ class VendorPaymentsModelTest extends BaseModelTest
          */
         $zappPayment = $this->setUpRequestMock(
             'POST', // Method
-            VendorPayments::class, // Class
+            Zapper::class, // Class
             'VendorPayments/Zapper', // Path
             'VendorPayments/POST_VendorPayments_Zapper_RESP.json', // Mock Response
             'VendorPayments/POST_VendorPayments_Zapper_REQ.json' // Mock Request

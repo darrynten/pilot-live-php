@@ -1,7 +1,7 @@
 <?php
 /**
  * Vendor Payment Model
- *
+ * @author Fergus Strangways-Dixon <fergusdixon@github.com>
  * Details on properties:
  * https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help/operations/GetVendorPayments
  */
@@ -96,18 +96,4 @@ class VendorPayments extends BaseModel
         return new ModelCollection(VendorPayments::class, $this->config, $results);
     }
 
-    /**
-     * Add a zapper payment
-     * @link https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help/operations/PostZapperPayment
-     * @param string $req
-     */
-    public function zapper(string $req)
-    {
-        // this string should have some sort of validation
-        $arr = [
-            'string' => $req,
-        ];
-        $data = $this->request->request('POST', $this->endpoint, 'Zapper', $arr);
-        return $data;
-    }
 }
