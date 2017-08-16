@@ -68,4 +68,12 @@ class OpenTableModelTest extends BaseModelTest
             ],
         ]);
     }
+
+    public function testDetail(){
+
+    }
+
+    public function testList(){
+
+    }
 }
