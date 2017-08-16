@@ -64,10 +64,10 @@ Checked off bits are complete.
 - [ ] Vendor Payments
   - [ ] Vendor Payment Collection
   - [x] Vendor Payment Model
-  - [ ] List Payments
+  - [x] List Payments
   - [ ] Processed Payments
   - [ ] App Payment
-  - [ ] Zapper Payment
+  - [x] Zapper Payment
 
 And any related models
 
