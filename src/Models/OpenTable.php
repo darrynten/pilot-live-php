@@ -82,4 +82,19 @@ class OpenTable extends BaseModel
             'readonly' => false,
         ],
     ];
+
+    public function detail(string $reference){
+        $results = $this->request->request('GET', $this->endpoint, sprintf('reference=/%s&', $reference));
+        $model = new OpenTable($this->config);
+        $model->loadResult($results);
+        return $model;
+    }
+
+    public function list()
+    {
+        $results = $this->request->request('GET', $this->endpoint, 'List');
+        return new ModelCollection(OpenTable::class, $this->config, $results);
+    }
+
+
 }
