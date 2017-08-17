@@ -1,0 +1,20 @@
+{
+  "CashierID":"String content",
+  "Covers":"String content",
+  "InvoiceNumber":"String content",
+  "Items":[{
+    "ItemName":"String content",
+    "Plu":"String content",
+    "Price":12678967.543233,
+    "Qty":12678967.543233,
+    "Tax":12678967.543233,
+    "Value":12678967.543233
+  }],
+  "OpenTableID":2147483647,
+  "OrderType":"String content",
+  "PosID":"String content",
+  "ReferenceNumber":"String content",
+  "SalesDate":"String content",
+  "SiteID":"String content",
+  "TableNumber":"String content"
+}
