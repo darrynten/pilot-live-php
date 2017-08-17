@@ -78,7 +78,7 @@ class OpenTableModelTest extends BaseModelTest
             'GET', // Method
             OpenTable::class, // Class
             'OpenTable/List', // Path
-            'OpenTable/GET_OpenTable_List.json' // Mock Response
+            'OpenTable/GET_OpenTable_List_RESP.json' // Mock Response
         );
 
         $allPayments = $vendPayment->list();
