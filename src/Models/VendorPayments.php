@@ -95,5 +95,4 @@ class VendorPayments extends BaseModel
         $results = $this->request->request('GET', $this->endpoint, 'List');
         return new ModelCollection(VendorPayments::class, $this->config, $results);
     }
-
 }

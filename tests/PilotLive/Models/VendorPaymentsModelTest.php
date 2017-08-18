@@ -120,32 +120,4 @@ class VendorPaymentsModelTest extends BaseModelTest
         $this->assertEquals($response->Message, 'String content');
         $this->assertTrue($response->Status);
     }
-
-    public function testZapper()
-    {
-
-        /**
-         * Do all the usual setup of mock handler, endpoint,
-         * request, response, expects, whens etc
-         */
-        $zappPayment = $this->setUpRequestMock(
-            'POST', // Method
-            Zapper::class, // Class
-            'VendorPayments/Zapper', // Path
-            'VendorPayments/POST_VendorPayments_Zapper_RESP.json', // Mock Response
-            'VendorPayments/POST_VendorPayments_Zapper_REQ.json' // Mock Request
-        );
-
-        $seedData = json_decode(
-            file_get_contents(__DIR__ . '/../../mocks/VendorPayments/POST_VendorPayments_Zapper_REQ.json')
-        );
-
-        $zappPayment->loadResult($seedData);
-
-        $response = $zappPayment->zapper("123123131313");
-
-        $this->assertEquals($response->Code, 2147483647);
-        $this->assertEquals($response->Message, 'String content');
-        $this->assertTrue($response->Status);
-    }
 }
