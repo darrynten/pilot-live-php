@@ -12,9 +12,11 @@ use DarrynTen\PilotLive\BaseModel;
 class VendorPayments extends BaseModel
 {
     protected $endpoint = 'VendorPayments';
+
     /**
      * @var array $fields
      */
+
     protected $fields = [
         'discountAmount' => [
             'type' => 'double',
