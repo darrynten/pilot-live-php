@@ -686,12 +686,9 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $mockClient = \Mockery::mock(
             'Client'
         );
-
-        $token = base64_encode($this->config['username'] . ':' . $this->config['password']);
-        $tokenType = 'Basic';
         $checkParameters = [
             'headers' => [
-                'Authorization' => sprintf('%s %s', $tokenType, $token)
+                'Authorization' =>'%s %s'
             ],
         ];
 
