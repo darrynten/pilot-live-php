@@ -1,0 +1,25 @@
+[{
+  "DiscountAmount":12678967.543233,
+  "PaymentAmount":12678967.543233,
+  "PaymentDate":"String content",
+  "PaymentReference":"String content",
+  "PilotReference":"String content",
+  "Processed":true,
+  "SiteID":"String content",
+  "TipAmount":12678967.543233,
+  "VendorID":2147483647,
+  "VendorPaymentID":2147483647,
+  "VoucherAmount":12678967.543233
+}, {
+  "DiscountAmount":213.01,
+  "PaymentAmount":1000.20,
+  "PaymentDate":"10/10/2017",
+  "PaymentReference":"ABC123",
+  "PilotReference":"123ABC",
+  "Processed":false,
+  "SiteID":"13213145",
+  "TipAmount":10.05,
+  "VendorID":1231,
+  "VendorPaymentID":345565,
+  "VoucherAmount":50.01
+}]
