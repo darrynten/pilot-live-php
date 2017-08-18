@@ -74,8 +74,13 @@ class SupplierInvoice extends BaseModel
 
     public function processed(string $invoiceID)
     {
-        //Where does invoiceID go?
-        $data = $this->request->request('GET', $this->endpoint, 'Processed');
+        $data = $this->request->request(
+            'GET',
+            $this->endpoint,
+            'Processed',
+            [
+                'invoiceid' => $invoiceID,
+            ]);
     }
 
     public function save()
