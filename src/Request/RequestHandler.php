@@ -182,7 +182,7 @@ class RequestHandler
     private function prepareRequest(string $service, string $method)
     {
         // We always add the API key to the URL
-        $options['query']['apikey'] = $this->getAuthToken();
+        $options['query']['ApiKey'] = $this->getAuthToken();
 
         $uri = sprintf(
             '%s/%s/%s/',
