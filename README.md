@@ -67,7 +67,6 @@ Checked off bits are complete.
   - [x] List Payments
   - [ ] Processed Payments
   - [ ] App Payment
-  - [x] Zapper Payment
 
 And any related models
 
