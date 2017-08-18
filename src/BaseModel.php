@@ -196,15 +196,20 @@ abstract class BaseModel
         $class = $this->getModelWithNamespace($config['type']);
 
         // So if the class doesn't exist, throw
+        $this->checkClassExists($class);
+
+        // And finally return an Object representation of the related Model
+        return $value->toObject();
+    }
+
+    private function checkClassExists($class)
+    {
         if (!class_exists($class)) {
             $this->throwException(ModelException::UNEXPECTED_PREPARE_CLASS, sprintf(
                 'Received unexpected namespaced class "%s" when preparing an object row',
                 $class
             ));
         }
-
-        // And finally return an Object representation of the related Model
-        return $value->toObject();
     }
 
     /**
