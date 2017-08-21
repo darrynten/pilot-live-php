@@ -1,5 +1,14 @@
 # pilot-live-php
 
+![Travis Build Status](https://travis-ci.org/darrynten/pilot-live-php.svg?branch=dev)
+![StyleCI Status](https://styleci.io/repos/99255430/shield?branch=dev)
+[![codecov](https://codecov.io/gh/darrynten/pilot-live-php/branch/dev/graph/badge.svg)](https://codecov.io/gh/darrynten/pilot-live-php)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/ce0fe741c45d4c40b66db03abe720454)](https://www.codacy.com/app/darrynten/pilot-live-php?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=darrynten/pilot-live-php&amp;utm_campaign=Badge_Grade)
+[![Code Climate](https://codeclimate.com/github/darrynten/pilot-live-php/badges/gpa.svg)](https://codeclimate.com/github/darrynten/pilot-live-php)
+[![Issue Count](https://codeclimate.com/github/darrynten/pilot-live-php/badges/issue_count.svg)](https://codeclimate.com/github/darrynten/pilot-live-php)
+![Packagist Version](https://img.shields.io/packagist/v/darrynten/pilot-live-php.svg)
+![MIT License](https://img.shields.io/github/license/darrynten/pilot-live-php.svg)
+
 [PilotLive API](https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help) client for PHP
 
 This will be a 100% fully unit tested and (mostly) fully featured unofficial PHP
@@ -15,9 +24,12 @@ PHP 7.0+
 
 ## Basic use
 
-### Definitions
+```php
 
-# TODO
+$table = new OpenTable($this->config);
+$detail = $table->detail('reference');
+
+```
 
 ## Features
 
@@ -63,8 +75,7 @@ Checked off bits are complete.
   - [ ] Vendor Payment Collection
   - [x] Vendor Payment Model
   - [x] List Payments
-  - [ ] Processed Payments
-  - [ ] App Payment
+  - [x] Processed Payments
 
 And any related models
 
@@ -77,13 +88,14 @@ Key methods
 
 Following this
 
-- [ ] Supplier Invoice
-  - [ ] Supplier Invoice 'Header' Collection
-  - [ ] Supplier Invoice 'Header' Model
-  - [ ] Supplier Invoice Details Collection
-  - [ ] Supplier Invoice Detail Model
-  - [ ] Processed
-  - [ ] Unprocessed
+- [x] Supplier Invoice
+  - [x] Supplier Invoice 'Header' Model (as SupplierInvoice)
+  - [x] Supplier Invoice Detail Model
+  - [x] Processed
+  - [x] Unprocessed
+- [ ] Zapper
+- [ ] Snapscan
+- [ ] Masterpass
 
 And any methods besides the two in the initial delivers.
 
