@@ -1,46 +1,36 @@
 <?php
-
 namespace DarrynTen\PilotLive\Tests\PilotLive\Models;
-
 use DarrynTen\PilotLive\Request\RequestHandler;
 use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use ReflectionClass;
-
 use DarrynTen\PilotLive\Exception\ModelException;
 use DarrynTen\PilotLive\Models\ModelCollection;
 use DarrynTen\PilotLive\Exception\ValidationException;
-
 abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
 {
     use HttpMockTrait;
-
     protected $config = [
         'key' => 'key',
         'endpoint' => '//localhost:8082',
     ];
-
     public static function setUpBeforeClass()
     {
         static::setUpHttpMockBeforeClass('8082', 'localhost');
     }
-
     public static function tearDownAfterClass()
     {
         static::tearDownHttpMockAfterClass();
     }
-
     public function setUp()
     {
         $this->setUpHttpMock();
     }
-
     public function tearDown()
     {
         $this->tearDownHttpMock();
     }
-
     /**
      * Extracts className from path A\B\C\ClassName
      *
@@ -52,7 +42,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $className = $classPath[ count($classPath) - 1];
         return $className;
     }
-
     /**
      * Verifies that passed $class (as string) is instance of $class
      *
@@ -63,7 +52,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $request = new $class($this->config);
         $this->assertInstanceOf($class, $request);
     }
-
     /**
      * Verifies that when we try to set undefined property it throws expected exception
      *
@@ -72,15 +60,12 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifySetUndefined(string $class)
     {
         $className = $this->getClassName($class);
-
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage("Model \"{$className}\" key doesNotExist value xyz Attempting to set a property that is not defined in the model");
         $this->expectExceptionCode(10113);
-
         $model = new $class($this->config);
         $model->doesNotExist = 'xyz';
     }
-
     /**
      * Verifies that when we try to set readonly property it throws expected exception
      *
@@ -90,7 +75,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifySetReadOnly(string $class, string $field)
     {
         $className = $this->getClassName($class);
-
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage(
             sprintf(
@@ -101,11 +85,9 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->expectExceptionCode(10114);
-
         $model = new $class($this->config);
         $model->{$field} = 'some value';
     }
-
     /**
      * Verifies that when we try to get undefined property it throws expected exception
      *
@@ -114,15 +96,12 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifyGetUndefined(string $class)
     {
         $className = $this->getClassName($class);
-
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage("Model \"{$className}\" key doesNotExist Attempting to get an undefined property");
         $this->expectExceptionCode(10116);
-
         $model = new $class($this->config);
         $throw = $model->doesNotExist;
     }
-
     /**
      * Verifies that when we try to set property to null and it can not be null it throws expected exception
      *
@@ -132,15 +111,12 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifyCanNotNullify(string $class, string $key)
     {
         $className = $this->getClassName($class);
-
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage("Model \"{$className}\" attempting to nullify key {$key} Property is null without nullable permission");
         $this->expectExceptionCode(10111);
-
         $model = new $class($this->config);
         $model->{$key} = null;
     }
-
     /**
      * Verifies that when we try to set property to null and it can be null it does not throw exception
      *
@@ -150,12 +126,10 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifyCanNullify(string $class, string $key)
     {
         $className = $this->getClassName($class);
-
         $model = new $class($this->config);
         $model->{$key} = null;
         $this->assertNull($model->{$key});
     }
-
     /**
      * Verifies that when we try to load data for model without required fields it throws expected exception
      *
@@ -165,18 +139,14 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifyBadImport(string $class, string $key)
     {
         $className = $this->getClassName($class);
-
         $model = new $class($this->config);
-
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage("Model \"{$className}\" Defined key \"{$key}\" not present in payload A property is missing in the loadResult payload");
         $this->expectExceptionCode(10112);
-
         $obj = new \stdClass;
         $obj->ID = 1;
         $model->loadResult($obj);
     }
-
     /**
      * Verifies that all fields has expected types, nullable and read only properties
      *
@@ -193,17 +163,13 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     {
         $model = new $class($this->config);
         $className = $this->getClassName($class);
-
         // Fields mapping
         $reflect = new ReflectionClass($model);
         $reflectValue = $reflect->getProperty('fields');
         $reflectValue->setAccessible(true);
         $value = $reflectValue->getValue(new $class($this->config));
-
         $fieldsCount = count($attributes);
-
         $this->assertCount($fieldsCount, $value);
-
         foreach ($attributes as $name => $options) {
             $this->verifyIfOptionsAreValid($className, $name, $options);
             $this->verifyCommonAttributes($className, $name, $options, $value);
@@ -227,7 +193,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             );
         }
     }
-
     /**
      * Verifies that field $name in $className has only valid options
      *
@@ -247,7 +212,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
-
     /**
      * Verifies that field $name has expected 'type', 'nullable' and 'readonly' fields
      *
@@ -273,7 +237,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         );
         $this->assertEquals('boolean', gettype($value[$name]['nullable']));
         $this->assertEquals('boolean', gettype($value[$name]['readonly']));
-
         $nullable = $options['nullable'];
         $nullableText = $nullable ? 'true': 'false';
         $nullableOptionText = $value[$name]['nullable'] ? 'true' : 'false';
@@ -282,18 +245,15 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             $value[$name]['nullable'],
             "Model {$className} Key {$name} Expected nullable to be {$nullableText} got {$nullableOptionText}"
         );
-
         $readonly = $options['readonly'];
         $readonlyText = $readonly ? 'true' : 'false';
         $readonlyOptionText = $value[$name]['readonly'] ? 'true' : 'false';
-
         $this->assertEquals(
             $readonly,
             $value[$name]['readonly'],
             "Model {$className} Key {$name} Expected readonly to be {$readonlyText} got {$readonlyOptionText}"
         );
     }
-
     /**
      * Verifies that field $name has expected min/max attributes (if any)
      *
@@ -314,13 +274,10 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             if (!($options['type'] === 'integer' || $options['type'] === 'string')) {
                 throw new \Exception('You can validate min & max only for integer or string');
             }
-
             $this->assertTrue(isset($value[$name]['min']), sprintf('"min" is not present for %s', $name));
             $this->assertTrue(isset($value[$name]['max']), sprintf('"max" is not present for %s', $name));
-
             $this->assertEquals('integer', gettype($value[$name]['max']));
             $this->assertEquals('integer', gettype($value[$name]['min']));
-
             $this->assertEquals(
                 $options['min'],
                 $value[$name]['min'],
@@ -332,7 +289,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                     $value[$name]['min']
                 )
             );
-
             $this->assertEquals(
                 $options['max'],
                 $value[$name]['max'],
@@ -346,7 +302,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             );
         }
     }
-
     /**
      * Verifies that field $name has required attribute (if any)
      *
@@ -366,19 +321,16 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             if ($options['required'] !== true) {
                 throw new \Exception('You can validate only required=true');
             }
-
             $this->assertTrue(
                 isset($value[$name]['required']),
                 sprintf('Model %s "required" for %s is not present', $className, $name)
             );
-
             $this->assertTrue(
                 $value[$name]['required'],
                 sprintf('Model %s "required" for %s must be true', $className, $name)
             );
         }
     }
-
     /**
      * Verifies that field $name has optional attribute (if any)
      *
@@ -398,19 +350,16 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             if ($options['optional'] !== true) {
                 throw new \Exception('You can validate only optional=true');
             }
-
             $this->assertTrue(
                 isset($value[$name]['optional']),
                 sprintf('Model %s "optional" for %s is not present', $className, $name)
             );
-
             $this->assertTrue(
                 $value[$name]['optional'],
                 sprintf('Model %s "optional" for %s must be true', $className, $name)
             );
         }
     }
-
     /**
      * Verifies that field $name has valid regex attribute (if any)
      *
@@ -431,16 +380,13 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 isset($value[$name]['regex']),
                 sprintf('Model %s "regex" for %s is not present', $className, $name)
             );
-
             $this->assertEquals($options['regex'], $value[$name]['regex']);
             $success = preg_match($value[$name]['regex'], '');
-
             if ($success === false) {
                 throw \Exception(sprintf('Model %s Failed to execute regex for %s', $className, $name));
             }
         }
     }
-
     /**
      * Verifies that field $name passes filter_var()
      *
@@ -461,11 +407,9 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 isset($value[$name]['validate']),
                 sprintf('Model %s "validate" for %s is not present', $className, $name)
             );
-
             $this->assertEquals($options['validate'], $value[$name]['validate']);
         }
     }
-
     /**
      * Verifies that field $name has valid default attribute (if any)
      *
@@ -489,7 +433,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($options['default'], $value[$name]['default']);
         }
     }
-
     /**
      * Verifies that field $name has valid class attribute (if type=ModelCollection)
      *
@@ -524,7 +467,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             ));
         }
     }
-
     /**
      * Verifies that we can load object from passed data (data should be valid, of course)
      *
@@ -534,14 +476,11 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifyInject(string $class, callable $whatToCheck)
     {
         $className = $this->getClassName($class);
-
         $model = new $class($this->config);
         $data = json_decode(file_get_contents(__DIR__ . "/../../mocks/{$className}/GET_{$className}_Get_xx.json"));
         $model->loadResult($data);
-
         $whatToCheck($model);
     }
-
     /**
      * Verifies that ValidationException for integer out of range is thrown
      * @param string $class Full path to the class
@@ -553,7 +492,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     public function verifyBadIntegerRangeException(string $class, string $field, int $min, int $max, int $value)
     {
         $className = $this->getClassName($class);
-
         $this->expectException(ValidationException::class);
         $this->expectExceptionMessage(
             sprintf(
@@ -564,12 +502,9 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->expectExceptionCode(10001);
-
         $model = new $class($this->config);
-
         $model->{$field} = $value;
     }
-
     /**
      * Verifies that bad enums are caught
      *
@@ -588,12 +523,9 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->expectExceptionCode(10006);
-
         $model = new $class($this->config);
-
         $model->{$field} = $value;
     }
-
     /**
      * Verifies that ValidationException for string with incorrect length is thrown
      * @param string $class Full path to the class
@@ -614,12 +546,9 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->expectExceptionCode(10002);
-
         $model = new $class($this->config);
-
         $model->{$field} = $value;
     }
-
     /**
      * Generates model with injected request which returns what we want
      *
@@ -640,9 +569,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         int $responseCode = 200
     ) {
         $apikey = 'key';
-
         $url = sprintf('/%s?ApiKey=%s', $path, $apikey);
-
         if ($method === 'GET') {
             if (!empty($parameters)) {
                 $queryString = [];
@@ -653,9 +580,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 $url = sprintf('/%s?%s', $path, $queryString);
             }
         }
-
         $urlWithoutParams = sprintf('/%s/', $path);
-
         $responseData = null;
         if ($mockFileResponse) {
             $responseData = file_get_contents(__DIR__ . '/../../mocks/' . $mockFileResponse);
@@ -664,7 +589,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         if ($mockFileRequest) {
             $requestData= json_decode(file_get_contents(__DIR__ . '/../../mocks/' . $mockFileRequest), true);
         }
-
         $this->http->mock
             ->when()
             ->methodIs($method)
@@ -674,27 +598,23 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             ->body($responseData)
             ->end();
         $this->http->setUp();
-
         $request = new RequestHandler($this->config);
-
         /**
-        * $client in RequestHandler receives url without query params
-        * they are passed as last parameter for $client->request
-        */
+         * $client in RequestHandler receives url without query params
+         * they are passed as last parameter for $client->request
+         */
         $fullUrl = sprintf('//localhost:8082%s', $url);
         $fullUrlWithoutParams = sprintf('//localhost:8082%s', $urlWithoutParams);
-
         $localClient = new Client();
         $localResult = $localClient->request(
             $method,
             $fullUrl,
             $requestData
         );
-
         $mockClient = \Mockery::mock(
             'Client'
         );
-
+        $checkParameters['query']['ApiKey'] = $apikey;
         if (!empty($parameters)) {
             if ($method === 'GET') {
                 foreach ($parameters as $key => $value) {
@@ -704,24 +624,19 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 $checkParameters['json'] = $parameters;
             }
         }
-
         $mockClient->shouldReceive('request')
             ->once()
             ->with($method, $fullUrlWithoutParams, \Mockery::subset($checkParameters))
             ->andReturn($localResult);
-
         $reflection = new ReflectionClass($request);
         $reflectedClient = $reflection->getProperty('client');
         $reflectedClient->setAccessible(true);
         $reflectedClient->setValue($request, $mockClient);
-
         $model = new $class($this->config);
-
         $modelReflection = new ReflectionClass($model);
         $reflectedRequest = $modelReflection->getProperty('request');
         $reflectedRequest->setAccessible(true);
         $reflectedRequest->setValue($model, $request);
-
         return $model;
     }
 }
