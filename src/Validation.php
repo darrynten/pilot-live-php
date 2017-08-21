@@ -100,7 +100,7 @@ trait Validation
      */
     public function validateRange($value, $min, $max)
     {
-        if (gettype($value) === 'integer') {
+        if (gettype($value) === 'integer' or gettype($value) === 'double') {
             if (($value < $min) || ($value > $max)) {
                 throw new ValidationException(
                     ValidationException::INTEGER_OUT_OF_RANGE,

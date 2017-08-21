@@ -70,15 +70,19 @@ class OpenTableModelTest extends BaseModelTest
     }
 
     public function testDetail(){
-        $reference = "123abc";
+        $params = [
+            'reference' => '123abc']
+        ;
         $table = $this->setUpRequestMock(
             'GET', // Method
             OpenTable::class, // Class
             'OpenTables/Detail', // Path
-            'OpenTable/GET_OpenTable_Detail_RESP.json' // Mock Response
+            'OpenTable/GET_OpenTable_Detail_RESP.json', // Mock Response
+            null,
+            $params
         );
-        $model = $table->detail($reference);
 
+        $model = $table->detail('123abc');
     }
 
     public function testList(){
