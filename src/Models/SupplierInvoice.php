@@ -81,6 +81,9 @@ class SupplierInvoice extends BaseModel
             [
                 'invoiceid' => $invoiceID,
             ]);
+        $model = new SupplierInvoice($this->config);
+        $model->loadResult($data);
+        return $model;
     }
 
     public function save()
