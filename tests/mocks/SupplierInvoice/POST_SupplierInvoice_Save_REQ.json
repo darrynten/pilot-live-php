@@ -1,0 +1,18 @@
+{
+  "Processed":true,
+  "PurchaseReference":"String content",
+  "StoreID":2147483647,
+  "SupplierID":"String content",
+  "SupplierInvoiceDetails":[{
+    "ChangePrice":true,
+    "Cost":12678967.543233,
+    "ProductID":"String content",
+    "Quantity":12678967.543233,
+    "SupplierInvoiceDetailID":2147483647,
+    "SupplierInvoiceHeaderID":2147483647,
+    "Vat":12678967.543233
+  }],
+  "SupplierInvoiceHeaderID":2147483647,
+  "SupplierReference":"String content",
+  "TranDate":"String content"
+}
