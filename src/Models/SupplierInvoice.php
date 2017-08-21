@@ -21,6 +21,8 @@ use DarrynTen\PilotLive\BaseModel;
  */
 class SupplierInvoice extends BaseModel
 {
+    protected $endpoint = 'SupplierInvoice';
+
     /**
      * @var array $fields
      */
@@ -69,4 +71,31 @@ class SupplierInvoice extends BaseModel
             'readonly' => false,
         ],
     ];
+
+    public function processed(string $invoiceID)
+    {
+        $data = $this->request->request(
+            'GET',
+            $this->endpoint,
+            'Processed',
+            [
+                'invoiceid' => $invoiceID,
+            ]);
+        $model = new SupplierInvoice($this->config);
+        $model->loadResult($data);
+        return $model;
+    }
+
+    public function save()
+    {
+        $arr = $this->toArray();
+        $data = $this->request->request('POST', $this->endpoint, 'Save', $arr);
+        return $data;
+    }
+
+    public function getUnprocessedList()
+    {
+        $results = $this->request->request('GET', $this->endpoint, 'Unprocessed/List');
+        return new ModelCollection(SupplierInvoice::class, $this->config, $results);
+    }
 }
