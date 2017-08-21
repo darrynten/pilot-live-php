@@ -89,11 +89,11 @@ class OpenTableModelTest extends BaseModelTest
         $table = $this->setUpRequestMock(
             'GET', // Method
             OpenTable::class, // Class
-            'OpenTable/List', // Path
+            'OpenTables/List', // Path
             'OpenTable/GET_OpenTable_List_RESP.json' // Mock Response
         );
 
         $allPayments = $table->list();
-        $payment = $allPayments->results[1];
+        $payment = $allPayments->results[0];
     }
 }

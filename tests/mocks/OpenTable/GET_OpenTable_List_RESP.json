@@ -5,12 +5,12 @@
   "Items":[{
     "ItemName":"String content",
     "Plu":"String content",
-    "Price":12678967.543233,
-    "Qty":12678967.543233,
-    "Tax":12678967.543233,
-    "Value":12678967.543233
+    "Price":80000.20,
+    "Qty":750.1,
+    "Tax":2520.33,
+    "Value":92520.33
   }],
-  "OpenTableID":2147483647,
+  "OpenTableID":21474,
   "OrderType":"String content",
   "PosID":"String content",
   "ReferenceNumber":"String content",
