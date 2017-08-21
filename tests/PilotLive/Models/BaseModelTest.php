@@ -271,13 +271,13 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     private function verifyMinMaxAttributes($className, $name, $options, $value)
     {
         if (isset($options['min']) && isset($options['max'])) {
-            if (!($options['type'] === 'integer' || $options['type'] === 'string')) {
-                throw new \Exception('You can validate min & max only for integer or string');
+            if (!($options['type'] === 'integer' || $options['type'] === 'string' || $options['type'] === 'double')) {
+                throw new \Exception('You can validate min & max only for integer, double or string');
             }
             $this->assertTrue(isset($value[$name]['min']), sprintf('"min" is not present for %s', $name));
             $this->assertTrue(isset($value[$name]['max']), sprintf('"max" is not present for %s', $name));
-            $this->assertEquals('integer', gettype($value[$name]['max']));
-            $this->assertEquals('integer', gettype($value[$name]['min']));
+            $this->assertContains(gettype($value[$name]['max']), ['integer', 'double']);
+            $this->assertContains(gettype($value[$name]['min']), ['integer', 'double']);
             $this->assertEquals(
                 $options['min'],
                 $value[$name]['min'],
