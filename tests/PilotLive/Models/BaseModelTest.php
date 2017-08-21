@@ -639,9 +639,9 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         array $parameters = [],
         int $responseCode = 200
     ) {
-        $apikey = urlencode('{key}');
+        $apikey = 'key';
 
-        $url = sprintf('/1.1.2/%s?apikey=%s', $path, $apikey);
+        $url = sprintf('/%s?ApiKey=%s', $path, $apikey);
 
         if ($method === 'GET') {
             if (!empty($parameters)) {
@@ -650,10 +650,11 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                     $queryString[] = sprintf('%s=%s', $key, $value);
                 }
                 $queryString = join('&', $queryString);
-                $url = sprintf('/1.1.2/%s?%s', $path, $queryString);
+                $url = sprintf('/%s?%s', $path, $queryString);
             }
         }
-        $urlWithoutParams = sprintf('/1.1.2/%s/', $path);
+
+        $urlWithoutParams = sprintf('/%s/', $path);
 
         $responseData = null;
         if ($mockFileResponse) {
@@ -676,47 +677,37 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
 
         $request = new RequestHandler($this->config);
 
+        /**
+        * $client in RequestHandler receives url without query params
+        * they are passed as last parameter for $client->request
+        */
+        $fullUrl = sprintf('//localhost:8082%s', $url);
+        $fullUrlWithoutParams = sprintf('//localhost:8082%s', $urlWithoutParams);
+
         $localClient = new Client();
         $localResult = $localClient->request(
             $method,
-            '//localhost:8082' . $url,
+            $fullUrl,
             $requestData
         );
 
         $mockClient = \Mockery::mock(
             'Client'
         );
-        $checkParameters = [
-            'headers' => [
-                'Authorization' =>'%s %s'
-            ],
-        ];
-
-        $checkParameters['query']['apikey'] = $apikey;
 
         if (!empty($parameters)) {
             if ($method === 'GET') {
                 foreach ($parameters as $key => $value) {
                     $checkParameters['query'][$key] = $value;
                 }
-            } elseif ($method === 'POST' || $method === 'PUT' || $method === 'DELETE') {
+            } elseif ($method === 'POST') {
                 $checkParameters['json'] = $parameters;
             }
         }
 
-        $verbs = ['GET', 'POST', 'PUT', 'DELETE'];
-        if (!in_array($method, $verbs)) {
-            throw new \Exception(sprintf('Only %s HTTP methods are allowed', join(', ', $verbs)));
-        }
-
-        /**
-        * $client in RequestHandler receives url without query params
-        * they are passed as last parameter for $client->request
-        */
-        $fullUrl = sprintf('//localhost:8082%s', $urlWithoutParams);
         $mockClient->shouldReceive('request')
             ->once()
-            ->with($method, $fullUrl, \Mockery::subset($checkParameters))
+            ->with($method, $fullUrlWithoutParams, \Mockery::subset($checkParameters))
             ->andReturn($localResult);
 
         $reflection = new ReflectionClass($request);
@@ -730,7 +721,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $reflectedRequest = $modelReflection->getProperty('request');
         $reflectedRequest->setAccessible(true);
         $reflectedRequest->setValue($model, $request);
-        
+
         return $model;
     }
 }
