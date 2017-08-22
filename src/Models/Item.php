@@ -19,7 +19,6 @@ use DarrynTen\PilotLive\BaseModel;
  */
 class Item extends BaseModel
 {
-    protected $endpoint = '';
     /**
      * @var array $fields
      */

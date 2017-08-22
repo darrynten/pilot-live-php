@@ -69,10 +69,12 @@ class OpenTableModelTest extends BaseModelTest
         ]);
     }
 
-    public function testDetail(){
+    public function testDetail()
+    {
         $params = [
-            'reference' => '123abc']
-        ;
+            'reference' => '123abc',
+            ];
+
         $table = $this->setUpRequestMock(
             'GET', // Method
             OpenTable::class, // Class
@@ -102,7 +104,8 @@ class OpenTableModelTest extends BaseModelTest
         $this->assertEquals($model->tableNumber, 'String content');
     }
 
-    public function testList(){
+    public function testList()
+    {
         $table = $this->setUpRequestMock(
             'GET', // Method
             OpenTable::class, // Class
