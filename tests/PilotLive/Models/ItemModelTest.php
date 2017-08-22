@@ -23,21 +23,29 @@ class ItemModelTest extends BaseModelTest
                 'type' => 'double',
                 'nullable' => false,
                 'readonly' => false,
+                'min' => 0.00,
+                'max' => 1000000.00,
             ],
             'qty' => [
                 'type' => 'double',
                 'nullable' => false,
                 'readonly' => false,
+                'min' => 0.00,
+                'max' => 1000000.00,
             ],
             'tax' => [
                 'type' => 'double',
                 'nullable' => false,
                 'readonly' => false,
+                'min' => 0.00,
+                'max' => 1000000.00,
             ],
             'value' => [
                 'type' => 'double',
                 'nullable' => false,
                 'readonly' => false,
+                'min' => 0.00,
+                'max' => 1000000.00,
             ],
         ]);
     }

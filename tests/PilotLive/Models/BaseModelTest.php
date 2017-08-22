@@ -1,5 +1,4 @@
 <?php
-
 namespace DarrynTen\PilotLive\Tests\PilotLive\Models;
 
 use DarrynTen\PilotLive\Request\RequestHandler;
@@ -7,7 +6,6 @@ use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 use ReflectionClass;
-
 use DarrynTen\PilotLive\Exception\ModelException;
 use DarrynTen\PilotLive\Models\ModelCollection;
 use DarrynTen\PilotLive\Exception\ValidationException;
@@ -153,6 +151,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
 
         $model = new $class($this->config);
         $model->{$key} = null;
+
         $this->assertNull($model->{$key});
     }
 
@@ -165,7 +164,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifyBadImport(string $class, string $key)
     {
         $className = $this->getClassName($class);
-
         $model = new $class($this->config);
 
         $this->expectException(ModelException::class);
@@ -199,9 +197,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $reflectValue = $reflect->getProperty('fields');
         $reflectValue->setAccessible(true);
         $value = $reflectValue->getValue(new $class($this->config));
-
         $fieldsCount = count($attributes);
-
         $this->assertCount($fieldsCount, $value);
 
         foreach ($attributes as $name => $options) {
@@ -214,6 +210,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             $this->verifyFilterVarAttribute($className, $name, $options, $value);
             $this->verifyDefaultAttribute($className, $name, $options, $value);
             $this->verifyCollectionAttribute($className, $name, $options, $value);
+
             $this->assertEquals(
                 count($options),
                 count($value[$name]),
@@ -241,6 +238,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             'type', 'nullable', 'readonly', 'default',
             'required', 'min', 'max', 'regex', 'collection', 'validate', 'optional', 'enum'
         ], true);
+
         foreach (array_keys($options) as $option) {
             if (!isset($validKeys[$option])) {
                 throw new \Exception(sprintf('Unable to validate %s for %s, undefined validation', $option, $name));
@@ -266,17 +264,20 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     private function verifyCommonAttributes($className, $name, $options, $value)
     {
         $this->assertTrue(is_array($value[$name]));
+
         $this->assertEquals(
             $options['type'],
             $value[$name]['type'],
             "Model {$className} Key {$name} Expected type {$options['type']} got {$value[$name]['type']}"
         );
+
         $this->assertEquals('boolean', gettype($value[$name]['nullable']));
         $this->assertEquals('boolean', gettype($value[$name]['readonly']));
 
         $nullable = $options['nullable'];
         $nullableText = $nullable ? 'true': 'false';
         $nullableOptionText = $value[$name]['nullable'] ? 'true' : 'false';
+
         $this->assertEquals(
             $nullable,
             $value[$name]['nullable'],
@@ -311,15 +312,14 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     private function verifyMinMaxAttributes($className, $name, $options, $value)
     {
         if (isset($options['min']) && isset($options['max'])) {
-            if (!($options['type'] === 'integer' || $options['type'] === 'string')) {
-                throw new \Exception('You can validate min & max only for integer or string');
+            if (!($options['type'] === 'integer' || $options['type'] === 'string' || $options['type'] === 'double')) {
+                throw new \Exception('You can validate min & max only for integer, double or string');
             }
 
             $this->assertTrue(isset($value[$name]['min']), sprintf('"min" is not present for %s', $name));
             $this->assertTrue(isset($value[$name]['max']), sprintf('"max" is not present for %s', $name));
-
-            $this->assertEquals('integer', gettype($value[$name]['max']));
-            $this->assertEquals('integer', gettype($value[$name]['min']));
+            $this->assertContains(gettype($value[$name]['max']), ['integer', 'double']);
+            $this->assertContains(gettype($value[$name]['min']), ['integer', 'double']);
 
             $this->assertEquals(
                 $options['min'],
@@ -486,6 +486,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 array_key_exists('default', $value[$name]),
                 sprintf('Model %s "default" for %s is not present', $className, $name)
             );
+
             $this->assertEquals($options['default'], $value[$name]['default']);
         }
     }
@@ -509,13 +510,17 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             if ($options['collection'] !== true) {
                 throw new \Exception('You can validate only collection=true');
             }
+
             $this->assertTrue(
                 array_key_exists('collection', $value[$name]),
                 sprintf('Model %s "collection" for %s is not present', $className, $name)
             );
+
             $this->assertEquals($options['type'], $value[$name]['type']);
             $this->assertEquals($options['collection'], $value[$name]['collection']);
+
             $fullPathToClass = sprintf('DarrynTen\PilotLive\Models\%s', $options['type']);
+
             $this->assertTrue(class_exists($fullPathToClass), sprintf(
                 'Model "%s" property "%s" class "%s" does not exist',
                 $className,
@@ -534,11 +539,11 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifyInject(string $class, callable $whatToCheck)
     {
         $className = $this->getClassName($class);
-
         $model = new $class($this->config);
-        $data = json_decode(file_get_contents(__DIR__ . "/../../mocks/{$className}/GET_{$className}_Get_xx.json"));
-        $model->loadResult($data);
 
+        $data = json_decode(file_get_contents(__DIR__ . "/../../mocks/{$className}/GET_{$className}_Get_xx.json"));
+
+        $model->loadResult($data);
         $whatToCheck($model);
     }
 
@@ -566,7 +571,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $this->expectExceptionCode(10001);
 
         $model = new $class($this->config);
-
         $model->{$field} = $value;
     }
 
@@ -590,7 +594,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $this->expectExceptionCode(10006);
 
         $model = new $class($this->config);
-
         $model->{$field} = $value;
     }
 
@@ -616,7 +619,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $this->expectExceptionCode(10002);
 
         $model = new $class($this->config);
-
         $model->{$field} = $value;
     }
 
@@ -640,7 +642,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         int $responseCode = 200
     ) {
         $apikey = 'key';
-
         $url = sprintf('/%s?ApiKey=%s', $path, $apikey);
 
         if ($method === 'GET') {
@@ -655,12 +656,14 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         }
 
         $urlWithoutParams = sprintf('/%s/', $path);
-
         $responseData = null;
+
         if ($mockFileResponse) {
             $responseData = file_get_contents(__DIR__ . '/../../mocks/' . $mockFileResponse);
         }
+
         $requestData = [];
+
         if ($mockFileRequest) {
             $requestData= json_decode(file_get_contents(__DIR__ . '/../../mocks/' . $mockFileRequest), true);
         }
@@ -674,17 +677,16 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             ->body($responseData)
             ->end();
         $this->http->setUp();
-
         $request = new RequestHandler($this->config);
 
         /**
-        * $client in RequestHandler receives url without query params
-        * they are passed as last parameter for $client->request
-        */
+         * $client in RequestHandler receives url without query params
+         * they are passed as last parameter for $client->request
+         */
         $fullUrl = sprintf('//localhost:8082%s', $url);
         $fullUrlWithoutParams = sprintf('//localhost:8082%s', $urlWithoutParams);
-
         $localClient = new Client();
+
         $localResult = $localClient->request(
             $method,
             $fullUrl,
@@ -718,12 +720,11 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $reflectedClient->setValue($request, $mockClient);
 
         $model = new $class($this->config);
-
         $modelReflection = new ReflectionClass($model);
+
         $reflectedRequest = $modelReflection->getProperty('request');
         $reflectedRequest->setAccessible(true);
         $reflectedRequest->setValue($model, $request);
-
         return $model;
     }
 }

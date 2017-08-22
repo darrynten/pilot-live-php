@@ -66,10 +66,11 @@ Checked off bits are complete.
 - [ ] Exception Handling
 - [ ] Real CRUD Response Mocks
 - [x] Open Tables
+  - [x] Open Table Collection
   - [x] Open Table Model
-  - [x] Items
-  - [ ] Open Table List
-  - [ ] Open Table Detail
+  - [x] Items Collection
+  - [x] Open Table List
+  - [x] Open Table Detail
 - [x] Vendor Payments
   - [x] Vendor Payment Collection
   - [x] Vendor Payment Model

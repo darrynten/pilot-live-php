@@ -21,6 +21,8 @@ use DarrynTen\PilotLive\BaseModel;
  */
 class OpenTable extends BaseModel
 {
+    protected $endpoint = 'OpenTables';
+
     /**
      * @var array $fields
      */
@@ -82,4 +84,24 @@ class OpenTable extends BaseModel
             'readonly' => false,
         ],
     ];
+
+    public function detail(string $reference)
+    {
+        $results = $this->request->request(
+            'GET',
+            $this->endpoint,
+            'Detail',
+            [
+                'reference' => $reference
+            ]);
+        $model = new OpenTable($this->config);
+        $model->loadResult($results);
+        return $model;
+    }
+
+    public function list()
+    {
+        $results = $this->request->request('GET', $this->endpoint, 'List');
+        return new ModelCollection(OpenTable::class, $this->config, $results);
+    }
 }
