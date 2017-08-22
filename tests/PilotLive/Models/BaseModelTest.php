@@ -578,7 +578,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $model = new $class($this->config);
         $model->{$field} = $value;
     }
-    
+
     /**
      * Generates model with injected request which returns what we want
      *
