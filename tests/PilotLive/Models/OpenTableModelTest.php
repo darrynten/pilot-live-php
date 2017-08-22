@@ -73,7 +73,7 @@ class OpenTableModelTest extends BaseModelTest
     {
         $params = [
             'reference' => '123abc',
-            ];
+        ];
 
         $table = $this->setUpRequestMock(
             'GET', // Method

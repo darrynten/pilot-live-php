@@ -13,26 +13,32 @@ use DarrynTen\PilotLive\Exception\ValidationException;
 abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
 {
     use HttpMockTrait;
+
     protected $config = [
         'key' => 'key',
         'endpoint' => '//localhost:8082',
     ];
+
     public static function setUpBeforeClass()
     {
         static::setUpHttpMockBeforeClass('8082', 'localhost');
     }
+
     public static function tearDownAfterClass()
     {
         static::tearDownHttpMockAfterClass();
     }
+
     public function setUp()
     {
         $this->setUpHttpMock();
     }
+
     public function tearDown()
     {
         $this->tearDownHttpMock();
     }
+
     /**
      * Extracts className from path A\B\C\ClassName
      *
@@ -44,6 +50,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $className = $classPath[ count($classPath) - 1];
         return $className;
     }
+
     /**
      * Verifies that passed $class (as string) is instance of $class
      *
@@ -54,6 +61,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $request = new $class($this->config);
         $this->assertInstanceOf($class, $request);
     }
+
     /**
      * Verifies that when we try to set undefined property it throws expected exception
      *
@@ -68,6 +76,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $model = new $class($this->config);
         $model->doesNotExist = 'xyz';
     }
+
     /**
      * Verifies that when we try to set readonly property it throws expected exception
      *
@@ -90,6 +99,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $model = new $class($this->config);
         $model->{$field} = 'some value';
     }
+
     /**
      * Verifies that when we try to get undefined property it throws expected exception
      *
@@ -104,6 +114,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $model = new $class($this->config);
         $throw = $model->doesNotExist;
     }
+
     /**
      * Verifies that when we try to set property to null and it can not be null it throws expected exception
      *
@@ -119,6 +130,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $model = new $class($this->config);
         $model->{$key} = null;
     }
+
     /**
      * Verifies that when we try to set property to null and it can be null it does not throw exception
      *
@@ -132,6 +144,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $model->{$key} = null;
         $this->assertNull($model->{$key});
     }
+
     /**
      * Verifies that when we try to load data for model without required fields it throws expected exception
      *
@@ -149,6 +162,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $obj->ID = 1;
         $model->loadResult($obj);
     }
+
     /**
      * Verifies that all fields has expected types, nullable and read only properties
      *
@@ -195,6 +209,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             );
         }
     }
+
     /**
      * Verifies that field $name in $className has only valid options
      *
@@ -214,6 +229,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
     /**
      * Verifies that field $name has expected 'type', 'nullable' and 'readonly' fields
      *
@@ -256,6 +272,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             "Model {$className} Key {$name} Expected readonly to be {$readonlyText} got {$readonlyOptionText}"
         );
     }
+
     /**
      * Verifies that field $name has expected min/max attributes (if any)
      *
@@ -304,6 +321,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             );
         }
     }
+
     /**
      * Verifies that field $name has required attribute (if any)
      *
@@ -333,6 +351,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             );
         }
     }
+
     /**
      * Verifies that field $name has optional attribute (if any)
      *
@@ -362,6 +381,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             );
         }
     }
+
     /**
      * Verifies that field $name has valid regex attribute (if any)
      *
@@ -389,6 +409,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             }
         }
     }
+
     /**
      * Verifies that field $name passes filter_var()
      *
@@ -412,6 +433,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($options['validate'], $value[$name]['validate']);
         }
     }
+
     /**
      * Verifies that field $name has valid default attribute (if any)
      *
@@ -435,6 +457,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals($options['default'], $value[$name]['default']);
         }
     }
+
     /**
      * Verifies that field $name has valid class attribute (if type=ModelCollection)
      *
@@ -469,6 +492,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             ));
         }
     }
+
     /**
      * Verifies that we can load object from passed data (data should be valid, of course)
      *
@@ -483,6 +507,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $model->loadResult($data);
         $whatToCheck($model);
     }
+
     /**
      * Verifies that ValidationException for integer out of range is thrown
      * @param string $class Full path to the class
@@ -507,6 +532,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $model = new $class($this->config);
         $model->{$field} = $value;
     }
+
     /**
      * Verifies that bad enums are caught
      *
@@ -528,6 +554,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $model = new $class($this->config);
         $model->{$field} = $value;
     }
+
     /**
      * Verifies that ValidationException for string with incorrect length is thrown
      * @param string $class Full path to the class
@@ -551,6 +578,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $model = new $class($this->config);
         $model->{$field} = $value;
     }
+    
     /**
      * Generates model with injected request which returns what we want
      *
