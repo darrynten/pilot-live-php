@@ -70,9 +70,11 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifySetUndefined(string $class)
     {
         $className = $this->getClassName($class);
+
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage("Model \"{$className}\" key doesNotExist value xyz Attempting to set a property that is not defined in the model");
         $this->expectExceptionCode(10113);
+
         $model = new $class($this->config);
         $model->doesNotExist = 'xyz';
     }
@@ -86,6 +88,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifySetReadOnly(string $class, string $field)
     {
         $className = $this->getClassName($class);
+
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage(
             sprintf(
@@ -96,6 +99,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             )
         );
         $this->expectExceptionCode(10114);
+
         $model = new $class($this->config);
         $model->{$field} = 'some value';
     }
@@ -108,9 +112,11 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifyGetUndefined(string $class)
     {
         $className = $this->getClassName($class);
+
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage("Model \"{$className}\" key doesNotExist Attempting to get an undefined property");
         $this->expectExceptionCode(10116);
+
         $model = new $class($this->config);
         $throw = $model->doesNotExist;
     }
@@ -124,9 +130,11 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifyCanNotNullify(string $class, string $key)
     {
         $className = $this->getClassName($class);
+
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage("Model \"{$className}\" attempting to nullify key {$key} Property is null without nullable permission");
         $this->expectExceptionCode(10111);
+
         $model = new $class($this->config);
         $model->{$key} = null;
     }
@@ -140,8 +148,10 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     protected function verifyCanNullify(string $class, string $key)
     {
         $className = $this->getClassName($class);
+
         $model = new $class($this->config);
         $model->{$key} = null;
+
         $this->assertNull($model->{$key});
     }
 
@@ -155,9 +165,11 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     {
         $className = $this->getClassName($class);
         $model = new $class($this->config);
+
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage("Model \"{$className}\" Defined key \"{$key}\" not present in payload A property is missing in the loadResult payload");
         $this->expectExceptionCode(10112);
+
         $obj = new \stdClass;
         $obj->ID = 1;
         $model->loadResult($obj);
@@ -506,6 +518,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
 
             $this->assertEquals($options['type'], $value[$name]['type']);
             $this->assertEquals($options['collection'], $value[$name]['collection']);
+
             $fullPathToClass = sprintf('DarrynTen\PilotLive\Models\%s', $options['type']);
 
             $this->assertTrue(class_exists($fullPathToClass), sprintf(
@@ -527,6 +540,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     {
         $className = $this->getClassName($class);
         $model = new $class($this->config);
+
         $data = json_decode(file_get_contents(__DIR__ . "/../../mocks/{$className}/GET_{$className}_Get_xx.json"));
 
         $model->loadResult($data);
@@ -544,8 +558,8 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     public function verifyBadIntegerRangeException(string $class, string $field, int $min, int $max, int $value)
     {
         $className = $this->getClassName($class);
-        $this->expectException(ValidationException::class);
 
+        $this->expectException(ValidationException::class);
         $this->expectExceptionMessage(
             sprintf(
                 'Validation error value %s out of min(%s) max(%s) Integer value is out of range',
@@ -554,7 +568,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 $max
             )
         );
-
         $this->expectExceptionCode(10001);
 
         $model = new $class($this->config);
@@ -571,7 +584,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     public function verifyBadEnum(string $class, string $field, $value)
     {
         $this->expectException(ValidationException::class);
-
         $this->expectExceptionMessage(
             sprintf(
                 'Validation error enum key %s of type %s failed to validate Enum failed to validate',
@@ -579,7 +591,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 gettype($value)
             )
         );
-
         $this->expectExceptionCode(10006);
 
         $model = new $class($this->config);
@@ -597,7 +608,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     public function verifyBadStringLengthException(string $class, string $field, int $min, int $max, string $value)
     {
         $this->expectException(ValidationException::class);
-
         $this->expectExceptionMessage(
             sprintf(
                 'Validation error value %s out of min(%s) max(%s) String length is out of range',
@@ -606,7 +616,6 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 $max
             )
         );
-
         $this->expectExceptionCode(10002);
 
         $model = new $class($this->config);
