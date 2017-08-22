@@ -179,6 +179,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     {
         $model = new $class($this->config);
         $className = $this->getClassName($class);
+
         // Fields mapping
         $reflect = new ReflectionClass($model);
         $reflectValue = $reflect->getProperty('fields');
@@ -186,6 +187,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $value = $reflectValue->getValue(new $class($this->config));
         $fieldsCount = count($attributes);
         $this->assertCount($fieldsCount, $value);
+
         foreach ($attributes as $name => $options) {
             $this->verifyIfOptionsAreValid($className, $name, $options);
             $this->verifyCommonAttributes($className, $name, $options, $value);
@@ -196,6 +198,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             $this->verifyFilterVarAttribute($className, $name, $options, $value);
             $this->verifyDefaultAttribute($className, $name, $options, $value);
             $this->verifyCollectionAttribute($className, $name, $options, $value);
+
             $this->assertEquals(
                 count($options),
                 count($value[$name]),
@@ -223,6 +226,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             'type', 'nullable', 'readonly', 'default',
             'required', 'min', 'max', 'regex', 'collection', 'validate', 'optional', 'enum'
         ], true);
+
         foreach (array_keys($options) as $option) {
             if (!isset($validKeys[$option])) {
                 throw new \Exception(sprintf('Unable to validate %s for %s, undefined validation', $option, $name));
@@ -248,24 +252,30 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     private function verifyCommonAttributes($className, $name, $options, $value)
     {
         $this->assertTrue(is_array($value[$name]));
+
         $this->assertEquals(
             $options['type'],
             $value[$name]['type'],
             "Model {$className} Key {$name} Expected type {$options['type']} got {$value[$name]['type']}"
         );
+
         $this->assertEquals('boolean', gettype($value[$name]['nullable']));
         $this->assertEquals('boolean', gettype($value[$name]['readonly']));
+
         $nullable = $options['nullable'];
         $nullableText = $nullable ? 'true': 'false';
         $nullableOptionText = $value[$name]['nullable'] ? 'true' : 'false';
+
         $this->assertEquals(
             $nullable,
             $value[$name]['nullable'],
             "Model {$className} Key {$name} Expected nullable to be {$nullableText} got {$nullableOptionText}"
         );
+
         $readonly = $options['readonly'];
         $readonlyText = $readonly ? 'true' : 'false';
         $readonlyOptionText = $value[$name]['readonly'] ? 'true' : 'false';
+
         $this->assertEquals(
             $readonly,
             $value[$name]['readonly'],
@@ -293,10 +303,12 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             if (!($options['type'] === 'integer' || $options['type'] === 'string' || $options['type'] === 'double')) {
                 throw new \Exception('You can validate min & max only for integer, double or string');
             }
+
             $this->assertTrue(isset($value[$name]['min']), sprintf('"min" is not present for %s', $name));
             $this->assertTrue(isset($value[$name]['max']), sprintf('"max" is not present for %s', $name));
             $this->assertContains(gettype($value[$name]['max']), ['integer', 'double']);
             $this->assertContains(gettype($value[$name]['min']), ['integer', 'double']);
+
             $this->assertEquals(
                 $options['min'],
                 $value[$name]['min'],
@@ -308,6 +320,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                     $value[$name]['min']
                 )
             );
+
             $this->assertEquals(
                 $options['max'],
                 $value[$name]['max'],
@@ -341,10 +354,12 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             if ($options['required'] !== true) {
                 throw new \Exception('You can validate only required=true');
             }
+
             $this->assertTrue(
                 isset($value[$name]['required']),
                 sprintf('Model %s "required" for %s is not present', $className, $name)
             );
+
             $this->assertTrue(
                 $value[$name]['required'],
                 sprintf('Model %s "required" for %s must be true', $className, $name)
@@ -371,10 +386,12 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             if ($options['optional'] !== true) {
                 throw new \Exception('You can validate only optional=true');
             }
+
             $this->assertTrue(
                 isset($value[$name]['optional']),
                 sprintf('Model %s "optional" for %s is not present', $className, $name)
             );
+
             $this->assertTrue(
                 $value[$name]['optional'],
                 sprintf('Model %s "optional" for %s must be true', $className, $name)
@@ -402,8 +419,10 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 isset($value[$name]['regex']),
                 sprintf('Model %s "regex" for %s is not present', $className, $name)
             );
+
             $this->assertEquals($options['regex'], $value[$name]['regex']);
             $success = preg_match($value[$name]['regex'], '');
+
             if ($success === false) {
                 throw \Exception(sprintf('Model %s Failed to execute regex for %s', $className, $name));
             }
@@ -430,6 +449,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 isset($value[$name]['validate']),
                 sprintf('Model %s "validate" for %s is not present', $className, $name)
             );
+
             $this->assertEquals($options['validate'], $value[$name]['validate']);
         }
     }
@@ -454,6 +474,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 array_key_exists('default', $value[$name]),
                 sprintf('Model %s "default" for %s is not present', $className, $name)
             );
+
             $this->assertEquals($options['default'], $value[$name]['default']);
         }
     }
@@ -477,13 +498,16 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             if ($options['collection'] !== true) {
                 throw new \Exception('You can validate only collection=true');
             }
+
             $this->assertTrue(
                 array_key_exists('collection', $value[$name]),
                 sprintf('Model %s "collection" for %s is not present', $className, $name)
             );
+
             $this->assertEquals($options['type'], $value[$name]['type']);
             $this->assertEquals($options['collection'], $value[$name]['collection']);
             $fullPathToClass = sprintf('DarrynTen\PilotLive\Models\%s', $options['type']);
+
             $this->assertTrue(class_exists($fullPathToClass), sprintf(
                 'Model "%s" property "%s" class "%s" does not exist',
                 $className,
@@ -504,6 +528,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $className = $this->getClassName($class);
         $model = new $class($this->config);
         $data = json_decode(file_get_contents(__DIR__ . "/../../mocks/{$className}/GET_{$className}_Get_xx.json"));
+
         $model->loadResult($data);
         $whatToCheck($model);
     }
@@ -520,6 +545,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     {
         $className = $this->getClassName($class);
         $this->expectException(ValidationException::class);
+
         $this->expectExceptionMessage(
             sprintf(
                 'Validation error value %s out of min(%s) max(%s) Integer value is out of range',
@@ -528,7 +554,9 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 $max
             )
         );
+
         $this->expectExceptionCode(10001);
+
         $model = new $class($this->config);
         $model->{$field} = $value;
     }
@@ -543,6 +571,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     public function verifyBadEnum(string $class, string $field, $value)
     {
         $this->expectException(ValidationException::class);
+
         $this->expectExceptionMessage(
             sprintf(
                 'Validation error enum key %s of type %s failed to validate Enum failed to validate',
@@ -550,7 +579,9 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 gettype($value)
             )
         );
+
         $this->expectExceptionCode(10006);
+
         $model = new $class($this->config);
         $model->{$field} = $value;
     }
@@ -566,6 +597,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     public function verifyBadStringLengthException(string $class, string $field, int $min, int $max, string $value)
     {
         $this->expectException(ValidationException::class);
+
         $this->expectExceptionMessage(
             sprintf(
                 'Validation error value %s out of min(%s) max(%s) String length is out of range',
@@ -574,7 +606,9 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 $max
             )
         );
+
         $this->expectExceptionCode(10002);
+
         $model = new $class($this->config);
         $model->{$field} = $value;
     }
@@ -600,6 +634,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
     ) {
         $apikey = 'key';
         $url = sprintf('/%s?ApiKey=%s', $path, $apikey);
+
         if ($method === 'GET') {
             if (!empty($parameters)) {
                 $queryString = [];
@@ -610,15 +645,20 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 $url = sprintf('/%s?%s', $path, $queryString);
             }
         }
+
         $urlWithoutParams = sprintf('/%s/', $path);
         $responseData = null;
+
         if ($mockFileResponse) {
             $responseData = file_get_contents(__DIR__ . '/../../mocks/' . $mockFileResponse);
         }
+
         $requestData = [];
+
         if ($mockFileRequest) {
             $requestData= json_decode(file_get_contents(__DIR__ . '/../../mocks/' . $mockFileRequest), true);
         }
+
         $this->http->mock
             ->when()
             ->methodIs($method)
@@ -629,6 +669,7 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
             ->end();
         $this->http->setUp();
         $request = new RequestHandler($this->config);
+
         /**
          * $client in RequestHandler receives url without query params
          * they are passed as last parameter for $client->request
@@ -636,15 +677,19 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
         $fullUrl = sprintf('//localhost:8082%s', $url);
         $fullUrlWithoutParams = sprintf('//localhost:8082%s', $urlWithoutParams);
         $localClient = new Client();
+
         $localResult = $localClient->request(
             $method,
             $fullUrl,
             $requestData
         );
+
         $mockClient = \Mockery::mock(
             'Client'
         );
+
         $checkParameters['query']['ApiKey'] = $apikey;
+
         if (!empty($parameters)) {
             if ($method === 'GET') {
                 foreach ($parameters as $key => $value) {
@@ -654,16 +699,20 @@ abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
                 $checkParameters['json'] = $parameters;
             }
         }
+
         $mockClient->shouldReceive('request')
             ->once()
             ->with($method, $fullUrlWithoutParams, \Mockery::subset($checkParameters))
             ->andReturn($localResult);
+
         $reflection = new ReflectionClass($request);
         $reflectedClient = $reflection->getProperty('client');
         $reflectedClient->setAccessible(true);
         $reflectedClient->setValue($request, $mockClient);
+
         $model = new $class($this->config);
         $modelReflection = new ReflectionClass($model);
+
         $reflectedRequest = $modelReflection->getProperty('request');
         $reflectedRequest->setAccessible(true);
         $reflectedRequest->setValue($model, $request);
