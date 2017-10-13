@@ -84,7 +84,7 @@ class OpenTableModelTest extends BaseModelTest
             $params
         );
 
-        $model = $table->detail('123abc');
+        $model = $table->detail('190-A1XUN1-1');
 
         $this->assertEquals($model->cashierID, 'String content');
         $this->assertEquals($model->covers, 'String content');
