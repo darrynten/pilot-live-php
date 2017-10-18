@@ -19,6 +19,8 @@ use DarrynTen\PilotLive\BaseModel;
  */
 class Item extends BaseModel
 {
+    //PHPUnit throws errors without this?
+    protected $endpoint = 'Item';
     /**
      * @var array $fields
      */
@@ -41,7 +43,7 @@ class Item extends BaseModel
             'max' => 1000000.00,
         ],
         'qty' => [
-            'type' => 'double',
+            'type' => 'integer',
             'nullable' => false,
             'readonly' => false,
             'min' => 0.00,

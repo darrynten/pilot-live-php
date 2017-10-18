@@ -1,46 +1,22 @@
 {
-  "CashierID": "9",
-  "Covers": "1",
-  "InvoiceNumber": "89143",
+  "CashierID": "11",
+  "Covers": "2",
+  "InvoiceNumber": "89287",
   "Items": [
     {
-      "ItemName": "Alabama Squid Heads",
-      "Plu": "2110",
-      "Price": 65,
+      "ItemName": " STR Beef Trinchado",
+      "Plu": "2018",
+      "Price": 85,
       "Qty": 1,
-      "Tax": 7.98,
-      "Value": 65
-    },
-    {
-      "ItemName": "MAKI - 6PC",
-      "Plu": "2348",
-      "Price": 0,
-      "Qty": 1,
-      "Tax": 0,
-      "Value": 0
-    },
-    {
-      "ItemName": "salmon",
-      "Plu": "2352",
-      "Price": 55,
-      "Qty": 1,
-      "Tax": 6.75,
-      "Value": 55
-    },
-    {
-      "ItemName": "salmon",
-      "Plu": "2352",
-      "Price": -55,
-      "Qty": -1,
-      "Tax": -6.75,
-      "Value": -55
+      "Tax": 10.44,
+      "Value": 85
     }
   ],
-  "OpenTableID": 975754,
+  "OpenTableID": 1004010,
   "OrderType": "S",
-  "PosID": "11",
-  "ReferenceNumber": "6190-A1XUN1-1",
-  "SalesDate": "2017-09-07 15:39:33.407",
+  "PosID": "0",
+  "ReferenceNumber": "6190-A1XYN1-1",
+  "SalesDate": "2017-10-11 12:23:05.853",
   "SiteID": "6190",
-  "TableNumber": "458"
+  "TableNumber": "014"
 }

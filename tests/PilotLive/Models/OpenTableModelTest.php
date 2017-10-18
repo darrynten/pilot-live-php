@@ -72,7 +72,7 @@ class OpenTableModelTest extends BaseModelTest
     public function testDetail()
     {
         $params = [
-            'reference' => '123abc',
+            'reference' => '6190-A1XYN1-1',
         ];
 
         $table = $this->setUpRequestMock(
@@ -84,24 +84,24 @@ class OpenTableModelTest extends BaseModelTest
             $params
         );
 
-        $model = $table->detail('190-A1XUN1-1');
+        $model = $table->detail('6190-A1XYN1-1');
 
-        $this->assertEquals($model->cashierID, 'String content');
-        $this->assertEquals($model->covers, 'String content');
-        $this->assertEquals($model->invoiceNumber, 'String content');
-        $this->assertEquals($model->items->results[0]->itemName, 'String content');
-        $this->assertEquals($model->items->results[0]->plu, 'String content');
-        $this->assertEquals($model->items->results[0]->price, 80000.20);
-        $this->assertEquals($model->items->results[0]->qty, 750.1);
-        $this->assertEquals($model->items->results[0]->tax, 2520.33);
-        $this->assertEquals($model->items->results[0]->value, 92520.33);
-        $this->assertEquals($model->openTableID, 21474);
-        $this->assertEquals($model->orderType, 'String content');
-        $this->assertEquals($model->posID, 'String content');
-        $this->assertEquals($model->referenceNumber, 'String content');
-        $this->assertEquals($model->salesDate, 'String content');
-        $this->assertEquals($model->siteID, 'String content');
-        $this->assertEquals($model->tableNumber, 'String content');
+        $this->assertEquals($model->cashierID, '11');
+        $this->assertEquals($model->covers, '2');
+        $this->assertEquals($model->invoiceNumber, '89287');
+        $this->assertEquals($model->items->results[0]->itemName, ' STR Beef Trinchado');
+        $this->assertEquals($model->items->results[0]->plu, '2018');
+        $this->assertEquals($model->items->results[0]->price, 85);
+        $this->assertEquals($model->items->results[0]->qty, 1);
+        $this->assertEquals($model->items->results[0]->tax, 10.44);
+        $this->assertEquals($model->items->results[0]->value, 85);
+        $this->assertEquals($model->openTableID, 1004010);
+        $this->assertEquals($model->orderType, 'S');
+        $this->assertEquals($model->posID, '0');
+        $this->assertEquals($model->referenceNumber, '6190-A1XYN1-1');
+        $this->assertEquals($model->salesDate, '2017-10-11 12:23:05.853');
+        $this->assertEquals($model->siteID, '6190');
+        $this->assertEquals($model->tableNumber, '014');
     }
 
     public function testList()

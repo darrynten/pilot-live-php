@@ -1,20 +1,140 @@
-[{
-  "CashierID":"String content",
-  "Covers":"String content",
-  "InvoiceNumber":"String content",
-  "Items":[{
-    "ItemName":"String content",
-    "Plu":"String content",
-    "Price":80000.20,
-    "Qty":750.1,
-    "Tax":2520.33,
-    "Value":92520.33
-  }],
-  "OpenTableID":21474,
-  "OrderType":"String content",
-  "PosID":"String content",
-  "ReferenceNumber":"String content",
-  "SalesDate":"String content",
-  "SiteID":"String content",
-  "TableNumber":"String content"
-}]
+[
+  {
+    "CashierID": "49",
+    "Covers": "1",
+    "InvoiceNumber": "89119",
+    "Items": [
+      {
+        "ItemName": "Aqua V Still 1LT",
+        "Plu": "4122",
+        "Price": 35,
+        "Qty": 1,
+        "Tax": 4.3,
+        "Value": 35
+      }
+    ],
+    "OpenTableID": 1003994,
+    "OrderType": "S",
+    "PosID": "8",
+    "ReferenceNumber": "6190-A1XTZ1-1",
+    "SalesDate": "2017-09-07 12:10:25.533",
+    "SiteID": "6190",
+    "TableNumber": "500"
+  },
+  {
+    "CashierID": "23",
+    "Covers": "1",
+    "InvoiceNumber": "89209",
+    "Items": [
+      {
+        "ItemName": "Flagstone Poetry Merlot",
+        "Plu": "5408",
+        "Price": 130,
+        "Qty": 1,
+        "Tax": 15.96,
+        "Value": 130
+      },
+      {
+        "ItemName": "Chicken Salad",
+        "Plu": "2060",
+        "Price": 115,
+        "Qty": 1,
+        "Tax": 14.12,
+        "Value": 115
+      },
+      {
+        "ItemName": "Aqua V Still 1LT",
+        "Plu": "4122",
+        "Price": 35,
+        "Qty": 1,
+        "Tax": 4.3,
+        "Value": 35
+      },
+      {
+        "ItemName": "Flagstone Poetry Merlot",
+        "Plu": "5408",
+        "Price": 130,
+        "Qty": 1,
+        "Tax": 15.96,
+        "Value": 130
+      },
+      {
+        "ItemName": "Pimms Cup",
+        "Plu": "5012",
+        "Price": 75,
+        "Qty": 1,
+        "Tax": 9.21,
+        "Value": 75
+      },
+      {
+        "ItemName": "Aqua V Still 1LT",
+        "Plu": "4122",
+        "Price": 35,
+        "Qty": 1,
+        "Tax": 4.3,
+        "Value": 35
+      }
+    ],
+    "OpenTableID": 1003996,
+    "OrderType": "S",
+    "PosID": "9",
+    "ReferenceNumber": "6190-A1XWH1-1",
+    "SalesDate": "2017-09-07 19:13:19.487",
+    "SiteID": "6190",
+    "TableNumber": "062"
+  },
+  {
+    "CashierID": "56",
+    "Covers": "1",
+    "InvoiceNumber": "89225",
+    "Items": [
+      {
+        "ItemName": "Menlyn Monroe",
+        "Plu": "4962",
+        "Price": 75,
+        "Qty": 1,
+        "Tax": 9.21,
+        "Value": 75
+      },
+      {
+        "ItemName": "Lamb Curry",
+        "Plu": "2176",
+        "Price": 330,
+        "Qty": 2,
+        "Tax": 40.53,
+        "Value": 330
+      },
+      {
+        "ItemName": "Pimms Cup",
+        "Plu": "5012",
+        "Price": 75,
+        "Qty": 1,
+        "Tax": 9.21,
+        "Value": 75
+      },
+      {
+        "ItemName": "GLS Merlot - Flags/P",
+        "Plu": "5712",
+        "Price": 45,
+        "Qty": 1,
+        "Tax": 5.53,
+        "Value": 45
+      },
+      {
+        "ItemName": "Pimms Cup",
+        "Plu": "5012",
+        "Price": 75,
+        "Qty": 1,
+        "Tax": 9.21,
+        "Value": 75
+      }
+    ],
+    "OpenTableID": 1003997,
+    "OrderType": "S",
+    "PosID": "0",
+    "ReferenceNumber": "6190-A1XWX1-1",
+    "SalesDate": "2017-09-07 20:08:10.463",
+    "SiteID": "6190",
+    "TableNumber": "208"
+  }
+]
