@@ -2,7 +2,6 @@
 
 namespace DarrynTen\PilotLive\Tests\PilotLive;
 
-
 use DarrynTen\PilotLive\Exception\ValidationException;
 use DarrynTen\PilotLive\Validation;
 
@@ -131,7 +130,8 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
         $this->validateRange(20, 5, 15);
     }
 
-    public function testValidateFilterVar(){
+    public function testValidateFilterVar()
+    {
         $this->validateFilterVar('test@gmail.com', FILTER_VALIDATE_EMAIL);
         $this->assertException(
             ValidationException::class,

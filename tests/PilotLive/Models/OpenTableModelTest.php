@@ -151,7 +151,5 @@ class OpenTableModelTest extends BaseModelTest
         $this->assertEquals($model->salesDate, '2017-09-07 19:13:19.487');
         $this->assertEquals($model->siteID, '6190');
         $this->assertEquals($model->tableNumber, '062');
-
-
     }
 }
