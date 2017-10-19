@@ -19,8 +19,6 @@ use DarrynTen\PilotLive\BaseModel;
  */
 class Item extends BaseModel
 {
-    //PHPUnit throws errors without this?
-    protected $endpoint = 'Item';
     /**
      * @var array $fields
      */
