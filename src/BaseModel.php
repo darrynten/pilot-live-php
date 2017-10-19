@@ -265,6 +265,9 @@ abstract class BaseModel
      */
     private function processResultItem($resultItem, $config)
     {
+        if($config['type'] === 'double'){
+            $resultItem = (double)$resultItem;
+        }
         if ($this->isValidPrimitive($resultItem, $config['type'])) {
             return $resultItem;
         }
