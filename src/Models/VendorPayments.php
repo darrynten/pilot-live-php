@@ -18,19 +18,9 @@ class VendorPayments extends BaseModel
      */
 
     protected $fields = [
-        'discountAmount' => [
-            'type' => 'double',
-            'nullable' => false,
-            'readonly' => false,
-        ],
         'paymentAmount' => [
             'type' => 'double',
             'nullable' => false,
-            'readonly' => false,
-        ],
-        'paymentDate' => [
-            'type' => 'string',
-            'nullable' => true,
             'readonly' => false,
         ],
         'paymentReference' => [
@@ -41,36 +31,6 @@ class VendorPayments extends BaseModel
         'pilotReference' => [
             'type' => 'string',
             'nullable' => true,
-            'readonly' => false,
-        ],
-        'processed' => [
-            'type' => 'boolean',
-            'nullable' => false,
-            'readonly' => false,
-        ],
-        'siteID' => [
-            'type' => 'string',
-            'nullable' => true,
-            'readonly' => false,
-        ],
-        'tipAmount' => [
-            'type' => 'double',
-            'nullable' => false,
-            'readonly' => false,
-        ],
-        'vendorID' => [
-            'type' => 'integer',
-            'nullable' => false,
-            'readonly' => false,
-        ],
-        'vendorPaymentID' => [
-            'type' => 'integer',
-            'nullable' => false,
-            'readonly' => false,
-        ],
-        'voucherAmount' => [
-            'type' => 'double',
-            'nullable' => false,
             'readonly' => false,
         ],
     ];
