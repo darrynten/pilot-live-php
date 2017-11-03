@@ -46,15 +46,4 @@ class VendorPayments extends BaseModel
         $data = $this->request->request('POST', $this->endpoint, 'Add', $arr);
         return $data;
     }
-
-    /**
-     * Getting vendor payments
-     * @link https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help/operations/GetVendorPayments
-     * @return ModelCollection
-     */
-    public function list()
-    {
-        $results = $this->request->request('GET', $this->endpoint, 'List');
-        return new ModelCollection(VendorPayments::class, $this->config, $results);
-    }
 }
