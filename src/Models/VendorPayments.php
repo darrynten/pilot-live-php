@@ -72,7 +72,7 @@ class VendorPayments extends BaseModel
             'type' => 'double',
             'nullable' => false,
             'readonly' => false,
-        ],
+        ]
     ];
 
     /**
