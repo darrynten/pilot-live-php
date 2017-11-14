@@ -215,32 +215,32 @@ class ValidationTest extends \PHPUnit_Framework_TestCase
     }
     public static function stringExceptionProvider()
     {
-        return array(
-            array(
+        return [
+            [
                 '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0asdhd out of min(5) max(15)',
                 '\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0\0asdhd',
                 5,
                 15,
-            ),
-            array(
+            ],
+            [
                 '666f6f0a626172 out of min(5) max(10)',
                 bin2hex("foo\nbar"),
                 5,
                 10
-            ),
-            array(
+            ],
+            [
                 'Zm9vYmFyIGJhcmZvbyAKIHpvbw== out of min(5) max(15)',
                 base64_encode("foobar barfoo \n zoo"),
                 5,
                 15
-            ),
-            array(
+            ],
+            [
                 '😀😀😀 out of min(1) max(2)',
                 json_decode('"\uD83D\uDE00"')
                 . json_decode('"\uD83D\uDE00"') . json_decode('"\uD83D\uDE00"'),
                 1,
                 2
-            ),
-        );
+            ],
+        ];
     }
 }
