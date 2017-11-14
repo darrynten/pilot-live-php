@@ -1,20 +1,22 @@
 {
-  "CashierID":"String content",
-  "Covers":"String content",
-  "InvoiceNumber":"String content",
-  "Items":[{
-    "ItemName":"String content",
-    "Plu":"String content",
-    "Price":80000.20,
-    "Qty":750.1,
-    "Tax":2520.33,
-    "Value":92520.33
-  }],
-  "OpenTableID":21474,
-  "OrderType":"String content",
-  "PosID":"String content",
-  "ReferenceNumber":"String content",
-  "SalesDate":"String content",
-  "SiteID":"String content",
-  "TableNumber":"String content"
+  "CashierID": "11",
+  "Covers": "2",
+  "InvoiceNumber": "89287",
+  "Items": [
+    {
+      "ItemName": " STR Beef Trinchado",
+      "Plu": "2018",
+      "Price": 85,
+      "Qty": 1,
+      "Tax": 10.44,
+      "Value": 85
+    }
+  ],
+  "OpenTableID": 1004010,
+  "OrderType": "S",
+  "PosID": "0",
+  "ReferenceNumber": "6190-A1XYN1-1",
+  "SalesDate": "2017-10-11 12:23:05.853",
+  "SiteID": "6190",
+  "TableNumber": "014"
 }
