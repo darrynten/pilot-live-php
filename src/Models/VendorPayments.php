@@ -18,19 +18,9 @@ class VendorPayments extends BaseModel
      */
 
     protected $fields = [
-        'discountAmount' => [
-            'type' => 'double',
-            'nullable' => false,
-            'readonly' => false,
-        ],
         'paymentAmount' => [
             'type' => 'double',
             'nullable' => false,
-            'readonly' => false,
-        ],
-        'paymentDate' => [
-            'type' => 'string',
-            'nullable' => true,
             'readonly' => false,
         ],
         'paymentReference' => [
@@ -43,36 +33,6 @@ class VendorPayments extends BaseModel
             'nullable' => true,
             'readonly' => false,
         ],
-        'processed' => [
-            'type' => 'boolean',
-            'nullable' => false,
-            'readonly' => false,
-        ],
-        'siteID' => [
-            'type' => 'string',
-            'nullable' => true,
-            'readonly' => false,
-        ],
-        'tipAmount' => [
-            'type' => 'double',
-            'nullable' => false,
-            'readonly' => false,
-        ],
-        'vendorID' => [
-            'type' => 'integer',
-            'nullable' => false,
-            'readonly' => false,
-        ],
-        'vendorPaymentID' => [
-            'type' => 'integer',
-            'nullable' => false,
-            'readonly' => false,
-        ],
-        'voucherAmount' => [
-            'type' => 'double',
-            'nullable' => false,
-            'readonly' => false,
-        ]
     ];
 
     /**
@@ -85,16 +45,5 @@ class VendorPayments extends BaseModel
         $arr = $this->toArray();
         $data = $this->request->request('POST', $this->endpoint, 'Add', $arr);
         return $data;
-    }
-
-    /**
-     * Getting vendor payments
-     * @link https://gateway.pilotlive.co.za/PilotGateway/PilotWebGateway.svc/help/operations/GetVendorPayments
-     * @return ModelCollection
-     */
-    public function list()
-    {
-        $results = $this->request->request('GET', $this->endpoint, 'List');
-        return new ModelCollection(VendorPayments::class, $this->config, $results);
     }
 }
