@@ -56,12 +56,13 @@ class VendorPaymentsModelTest extends BaseModelTest
         $this->assertTrue($response->Status);
     }
 
-    public function testBadMock(){
+    public function testBadMock()
+    {
         $this->expectException(ModelException::class);
         $this->expectExceptionMessage('Model "VendorPayments" Defined key "pilotReference" not present in '
                                     . 'payload A property is missing in the loadResult payload');
         $this->expectExceptionCode(ModelException::INVALID_LOAD_RESULT_PAYLOAD);
-        
+
         $vendPayment = $this->setUpRequestMock(
             'POST', // Method
             VendorPayments::class, // Class
