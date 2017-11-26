@@ -2,13 +2,12 @@
 
 namespace DarrynTen\PilotLive\Tests\PilotLive;
 
-use DarrynTen\PilotLive\Exception\ConfigException;
+use PHPUnit\Framework\TestCase;
 use DarrynTen\PilotLive\PilotLive;
-use DarrynTen\PilotLive\Request\RequestHandler;
-use DarrynTen\PilotLive\Exception\RequestHandlerException;
+use DarrynTen\PilotLive\Exception\ConfigException;
 use DarrynTen\PilotLive\Tests\PilotLive\Helpers\DataHelper;
 
-class PilotLiveTest extends \PHPUnit_Framework_TestCase
+class PilotLiveTest extends TestCase
 {
     use DataHelper;
 

@@ -2,9 +2,10 @@
 
 namespace DarrynTen\PilotLive\Tests\PilotLive;
 
+use PHPUnit\Framework\TestCase;
 use DarrynTen\PilotLive\Exception\LibraryException;
 
-class LibraryExceptionTest extends \PHPUnit_Framework_TestCase
+class LibraryExceptionTest extends TestCase
 {
     public function testMethodNotImplemented()
     {

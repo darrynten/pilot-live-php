@@ -2,10 +2,11 @@
 
 namespace DarrynTen\PilotLive\Tests\PilotLive;
 
-use DarrynTen\PilotLive\Exception\ValidationException;
+use PHPUnit\Framework\TestCase;
 use DarrynTen\PilotLive\Validation;
+use DarrynTen\PilotLive\Exception\ValidationException;
 
-class ValidationTest extends \PHPUnit_Framework_TestCase
+class ValidationTest extends TestCase
 {
     use Validation;
     /**
