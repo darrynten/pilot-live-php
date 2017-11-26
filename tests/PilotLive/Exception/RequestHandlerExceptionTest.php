@@ -2,16 +2,17 @@
 
 namespace DarrynTen\PilotLive\Tests\PilotLive;
 
-use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
-use GuzzleHttp\Client;
 use ReflectionClass;
-use DarrynTen\PilotLive\Request\RequestHandler;
-use DarrynTen\PilotLive\Exception\RequestHandlerException;
-use DarrynTen\PilotLive\Exception\ExceptionMessages;
+use GuzzleHttp\Client;
+use PHPUnit\Framework\TestCase;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\ServerException;
+use DarrynTen\PilotLive\Request\RequestHandler;
+use DarrynTen\PilotLive\Exception\ExceptionMessages;
+use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
+use DarrynTen\PilotLive\Exception\RequestHandlerException;
 
-class RequestHandlerExceptionTest extends \PHPUnit_Framework_TestCase
+class RequestHandlerExceptionTest extends TestCase
 {
     use HttpMockTrait;
 

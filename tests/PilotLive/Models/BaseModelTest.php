@@ -1,16 +1,15 @@
 <?php
 namespace DarrynTen\PilotLive\Tests\PilotLive\Models;
 
-use DarrynTen\PilotLive\Request\RequestHandler;
-use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
 use ReflectionClass;
+use GuzzleHttp\Client;
+use PHPUnit\Framework\TestCase;
+use DarrynTen\PilotLive\Request\RequestHandler;
 use DarrynTen\PilotLive\Exception\ModelException;
-use DarrynTen\PilotLive\Models\ModelCollection;
 use DarrynTen\PilotLive\Exception\ValidationException;
+use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
 
-abstract class BaseModelTest extends \PHPUnit_Framework_TestCase
+abstract class BaseModelTest extends TestCase
 {
     use HttpMockTrait;
 

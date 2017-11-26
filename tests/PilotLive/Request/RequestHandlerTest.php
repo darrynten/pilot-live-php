@@ -2,13 +2,11 @@
 
 namespace DarrynTen\PilotLive\Tests\PilotLive\Request;
 
+use PHPUnit\Framework\TestCase;
 use DarrynTen\PilotLive\Request\RequestHandler;
 use InterNations\Component\HttpMock\PHPUnit\HttpMockTrait;
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Response;
-use ReflectionClass;
 
-class RequestHandlerTest extends \PHPUnit_Framework_TestCase
+class RequestHandlerTest extends TestCase
 {
     use HttpMockTrait;
 
