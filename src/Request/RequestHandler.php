@@ -35,7 +35,7 @@ class RequestHandler
      *
      * @var Client $client
      */
-    private $client;
+    public $client;
 
     /**
      * The PilotLive url
