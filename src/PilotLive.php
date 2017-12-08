@@ -33,7 +33,7 @@ class PilotLive
      *
      * @var RequestHandler $request
      */
-    private $request;
+    public $request;
 
     /**
      * PilotLive constructor
